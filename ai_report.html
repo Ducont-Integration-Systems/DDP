@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Financial Intelligence Reports | Ducont Digital Platform</title>
+  
+  <!-- Premium Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js 4.4 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  
+  <!-- Tailwind CSS CDN with custom Ducont brand colors -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#fdf4fc',
+              100: '#fbeffa',
+              200: '#f7dcf5',
+              300: '#f0bbee',
+              400: '#e38ce0',
+              500: '#d05bce',
+              600: '#b43ab0',
+              700: '#950c97',
+              800: '#7c017d',
+              900: '#640564',
+              950: '#2b0830',
+            },
+            sidebar: {
+              dark: '#1a1b3c',
+              purple: '#7c017d',
+              accent: '#e759ea',
+            }
+          },
+          boxShadow: {
+            '2xs': '0 1px 2px 0 rgba(0, 0, 0, 0.03)',
+            'xs': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
+            'brand': '0 4px 14px -2px rgba(124, 1, 125, 0.35)',
+            'brand-lg': '0 10px 30px -4px rgba(124, 1, 125, 0.25)',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    :root {
+      --primary: #7C017D;
+      --primary-glow: #950C97;
+      --accent: #FBEFFA;
+    }
+    body {
+      background-color: #F8F7FC;
+      color: #1e293b;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .badge-pulse {
+      animation: pulseGlow 2s infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); }
+    }
+    .tab-active {
+      background-color: #7C017D !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 12px rgba(124, 1, 125, 0.3);
+    }
+    .tab-active svg {
+      color: #ffffff !important;
+    }
+    .subtab-active {
+      background-color: #7C017D !important;
+      color: #ffffff !important;
+      border-color: #7C017D !important;
+      box-shadow: 0 2px 8px rgba(124, 1, 125, 0.25);
+    }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#F8F7FC] antialiased selection:bg-[#FBEFFA] selection:text-[#7C017D]">
+
+  <!-- ─── TOAST NOTIFICATION CONTAINER ────────────────────────── -->
+  <div id="toastContainer" class="fixed top-5 right-5 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
+
+  <!-- ─── OPTIMIZATION DETAIL MODAL ────────────────────────────── -->
+  <div id="oppModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl border border-purple-200 shadow-2xl max-w-2xl w-full p-6 space-y-5 animate-fadeIn">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-purple-100 text-[#7C017D] flex items-center justify-center font-bold">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <div>
+            <h3 id="modalTitle" class="text-base font-extrabold text-slate-900">Opportunity Details</h3>
+            <p id="modalCategory" class="text-xs text-slate-500">Immediate Feasibility · Vendor Optimization</p>
+          </div>
+        </div>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        <div class="p-4 bg-purple-50/70 border border-purple-200/80 rounded-xl space-y-2">
+          <span class="text-[11px] font-bold text-[#7C017D] uppercase tracking-wider block">Identified Value Potential</span>
+          <div class="flex items-baseline gap-3">
+            <span id="modalSavings" class="text-2xl font-extrabold text-emerald-700">$0</span>
+            <span id="modalImpact" class="text-xs font-semibold text-slate-600">Annual Run-Rate Reduction</span>
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <h4 class="font-bold text-slate-800 uppercase tracking-wider text-[11px]">Analysis & Machine Learning Diagnostics</h4>
+          <p id="modalDescription" class="text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-200/80"></p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+            <span class="text-[10px] text-slate-400 font-semibold block uppercase">Target Vendors / Accounts</span>
+            <span id="modalVendors" class="font-bold text-slate-800 text-xs mt-0.5 block">N/A</span>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+            <span class="text-[10px] text-slate-400 font-semibold block uppercase">Implementation SLA</span>
+            <span id="modalSla" class="font-bold text-[#7C017D] text-xs mt-0.5 block">2 - 5 Business Days</span>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="font-bold text-slate-800 uppercase tracking-wider text-[11px]">Recommended CFO Action Plan</h4>
+          <ul id="modalSteps" class="space-y-1.5 text-slate-600"></ul>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 pt-3 border-t border-slate-100">
+        <button onclick="closeModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl cursor-pointer">Close</button>
+        <button onclick="applyOpportunityAction()" class="px-4 py-2 bg-[#7C017D] hover:bg-[#640564] text-white font-bold text-xs rounded-xl shadow-xs cursor-pointer flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          <span>Initiate Workflow in ERP</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── ROOT LAYOUT ───────────────────────────────────────────── -->
+  <div class="flex min-h-screen">
+
+    <!-- ─── 1. DUCONT MODERN SIDEBAR (DESKTOP) ────────────────── -->
+    <aside class="hidden lg:flex flex-col w-64 shrink-0 bg-gradient-to-b from-[#1a1b3c] to-[#7c017d] text-white p-4 justify-between select-none">
+      <div class="space-y-6">
+        <!-- Logo Branding -->
+        <div class="flex items-center gap-3 px-2 py-2">
+          <div class="w-9 h-9 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center font-extrabold text-sm tracking-wider text-white shadow-inner">
+            DU
+          </div>
+          <div>
+            <div class="font-extrabold text-sm tracking-tight text-white leading-none">DUCONT</div>
+            <div class="text-[10px] text-purple-200/70 font-medium tracking-wider mt-0.5 uppercase">Digital Platform</div>
+          </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="space-y-1 text-xs font-semibold">
+          <div class="text-[10px] uppercase font-bold text-purple-200/50 px-3 py-1 tracking-wider">Main</div>
+          <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-purple-100/70 hover:bg-white/10 hover:text-white transition-colors">
+            <svg class="w-4 h-4 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+            <span>Executive Dashboard</span>
+          </a>
+
+          <div class="text-[10px] uppercase font-bold text-purple-200/50 px-3 pt-3 pb-1 tracking-wider">Finance & AI</div>
+          
+          <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-purple-100/70 hover:bg-white/10 hover:text-white transition-colors">
+            <svg class="w-4 h-4 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>Finance Overview</span>
+          </a>
+
+          <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-purple-100/70 hover:bg-white/10 hover:text-white transition-colors">
+            <svg class="w-4 h-4 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span>Invoices & Billing</span>
+          </a>
+
+          <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-purple-100/70 hover:bg-white/10 hover:text-white transition-colors">
+            <svg class="w-4 h-4 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+            <span>Expense Management</span>
+          </a>
+
+          <!-- ACTIVE AI REPORTS ITEM -->
+          <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded-xl bg-white/20 text-white font-bold border border-white/20 shadow-md">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-[#e759ea]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+              <span>AI Reports Hub</span>
+            </div>
+            <span class="w-2 h-2 rounded-full bg-[#e759ea] badge-pulse"></span>
+          </a>
+
+          <div class="text-[10px] uppercase font-bold text-purple-200/50 px-3 pt-3 pb-1 tracking-wider">Enterprise Modules</div>
+          <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-purple-100/70 hover:bg-white/10 hover:text-white transition-colors">
+            <svg class="w-4 h-4 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            <span>HR &amp; Leave Portal</span>
+          </a>
+
+          <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-purple-100/70 hover:bg-white/10 hover:text-white transition-colors">
+            <svg class="w-4 h-4 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+            <span>Projects &amp; Tasks</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- User Profile in Sidebar -->
+      <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-[#e759ea] text-[#1a1b3c] flex items-center justify-center font-extrabold text-xs">
+            CF
+          </div>
+          <div>
+            <div class="font-bold text-xs text-white">Chief Finance Officer</div>
+            <div class="text-[10px] text-purple-200/70">Ducont Global</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── 2. MAIN APPLICATION CONTENT AREA ────────────────────── -->
+    <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+      
+      <!-- Top Sticky Navbar -->
+      <header class="bg-white border-b border-slate-200 sticky top-0 z-30 px-6 py-3.5 flex items-center justify-between gap-4 shadow-xs">
+        <div class="flex items-center gap-3">
+          <div class="text-xs font-semibold text-slate-500">
+            <span class="text-slate-400">Finance</span> / <span class="text-[#7C017D] font-bold">AI Financial Intelligence Reports</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <!-- Real-Time AI Status Badge -->
+          <div class="hidden sm:flex items-center gap-2 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-xs font-bold text-emerald-700">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span>ML Engine Live (v2.4.0)</span>
+          </div>
+
+          <!-- Region Filter -->
+          <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs">
+            <span class="text-slate-400 font-semibold">Region:</span>
+            <select id="globalRegionSelect" onchange="handleGlobalFilterChange()" class="bg-transparent font-bold text-[#7C017D] focus:outline-none cursor-pointer">
+              <option value="all">Global (All Regions)</option>
+              <option value="ME">Middle East (ME)</option>
+              <option value="USA">USA Division</option>
+              <option value="IND">India Division</option>
+            </select>
+          </div>
+
+          <!-- Fiscal Year Filter -->
+          <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs">
+            <span class="text-slate-400 font-semibold">FY:</span>
+            <select id="globalYearSelect" onchange="handleGlobalFilterChange()" class="bg-transparent font-bold text-[#7C017D] focus:outline-none cursor-pointer">
+              <option value="2025">FY 2025</option>
+              <option value="2024">FY 2024</option>
+            </select>
+          </div>
+
+          <!-- Refresh Button -->
+          <button onclick="triggerGlobalRefresh()" id="topRefreshBtn" class="flex items-center gap-2 px-3.5 py-1.5 bg-[#7C017D] hover:bg-[#640564] text-white font-bold text-xs rounded-xl transition-all shadow-xs cursor-pointer">
+            <svg id="topRefreshIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            <span class="hidden sm:inline">Refresh Intelligence</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Page Body Container -->
+      <main class="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] w-full mx-auto pb-24">
+
+        <!-- ─── PAGE TITLE & HEADER BANNER ────────────────────── -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-5">
+          <div>
+            <h1 class="text-2xl font-extrabold tracking-tight text-[#2b0830] flex items-center gap-3">
+              AI Financial Intelligence Reports
+              <span class="text-xs px-3 py-1 font-semibold bg-[#FBEFFA] text-[#950C97] rounded-full border border-purple-200">
+                6 Autonomous AI Agents
+              </span>
+            </h1>
+            <p class="text-xs text-slate-500 mt-1">
+              Real-time ML insights, forecasting narratives, risk audits, and operational analytics across organizational domains
+            </p>
+          </div>
+        </div>
+
+        <!-- ─── 6 HORIZONTAL PRIMARY AGENT TABS ───────────────── -->
+        <div class="bg-white border border-purple-200/80 rounded-2xl p-2 shadow-xs overflow-x-auto custom-scrollbar">
+          <div class="flex min-w-max items-center gap-1.5">
+            <!-- Tab 1: Cost & Spend (Live) -->
+            <button onclick="switchAgent('cost-spend')" id="agentBtn-cost-spend" class="agent-nav-btn tab-active flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold transition-all whitespace-nowrap cursor-pointer">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+              <span>Cost &amp; Spend</span>
+            </button>
+
+            <!-- Tab 2: Cash Flow & Capital (Live) -->
+            <button onclick="switchAgent('cashflow-workingcapital')" id="agentBtn-cashflow-workingcapital" class="agent-nav-btn text-slate-600 hover:text-[#7C017D] hover:bg-purple-50/70 border border-transparent flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold transition-all whitespace-nowrap cursor-pointer">
+              <svg class="w-4 h-4 shrink-0 text-[#7C017D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+              <span>Cash Flow &amp; Capital</span>
+            </button>
+
+            <!-- Tab 3: Financial Performance (In Plan) -->
+            <button onclick="switchAgent('financial-performance')" id="agentBtn-financial-performance" class="agent-nav-btn text-slate-600 hover:text-[#7C017D] hover:bg-purple-50/70 border border-transparent flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold transition-all whitespace-nowrap cursor-pointer">
+              <svg class="w-4 h-4 shrink-0 text-[#7C017D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+              <span>Financial Performance</span>
+              <span class="px-2 py-0.5 text-[10px] rounded-full font-bold bg-slate-100 text-slate-600 border border-slate-200">In Plan</span>
+            </button>
+
+            <!-- Tab 4: Revenue & Commercial (In Plan) -->
+            <button onclick="switchAgent('revenue-commercial')" id="agentBtn-revenue-commercial" class="agent-nav-btn text-slate-600 hover:text-[#7C017D] hover:bg-purple-50/70 border border-transparent flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold transition-all whitespace-nowrap cursor-pointer">
+              <svg class="w-4 h-4 shrink-0 text-[#7C017D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+              <span>Revenue &amp; Commercial</span>
+              <span class="px-2 py-0.5 text-[10px] rounded-full font-bold bg-slate-100 text-slate-600 border border-slate-200">In Plan</span>
+            </button>
+
+            <!-- Tab 5: Risk & Compliance (In Plan) -->
+            <button onclick="switchAgent('risk-compliance')" id="agentBtn-risk-compliance" class="agent-nav-btn text-slate-600 hover:text-[#7C017D] hover:bg-purple-50/70 border border-transparent flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold transition-all whitespace-nowrap cursor-pointer">
+              <svg class="w-4 h-4 shrink-0 text-[#7C017D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+              <span>Risk &amp; Compliance</span>
+              <span class="px-2 py-0.5 text-[10px] rounded-full font-bold bg-slate-100 text-slate-600 border border-slate-200">In Plan</span>
+            </button>
+
+            <!-- Tab 6: Finance Operations (In Plan) -->
+            <button onclick="switchAgent('ops-transaction')" id="agentBtn-ops-transaction" class="agent-nav-btn text-slate-600 hover:text-[#7C017D] hover:bg-purple-50/70 border border-transparent flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold transition-all whitespace-nowrap cursor-pointer">
+              <svg class="w-4 h-4 shrink-0 text-[#7C017D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+              <span>Finance Operations</span>
+              <span class="px-2 py-0.5 text-[10px] rounded-full font-bold bg-slate-100 text-slate-600 border border-slate-200">In Plan</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ─── AGENT CONTAINER 1: COST & SPEND INTELLIGENCE ─── -->
+        <div id="view-cost-spend" class="agent-view space-y-5">
+          <!-- Sub-Use Case Navigation Bar -->
+          <div class="bg-white border border-slate-200/90 rounded-2xl p-2 flex items-center justify-between gap-3 shadow-xs overflow-x-auto custom-scrollbar">
+            <div class="flex items-center gap-1.5 flex-nowrap shrink-0">
+              <button onclick="switchCostSubTab('cost-management')" id="subtab-cost-management" class="cost-subtab subtab-active flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap border">
+                Cost Management
+              </button>
+              <button onclick="switchCostSubTab('spend-analysis')" id="subtab-spend-analysis" class="cost-subtab bg-slate-50/80 text-slate-700 hover:bg-purple-50/70 hover:text-[#7C017D] border-slate-200/80 flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap border">
+                Spend Analysis
+              </button>
+              <button onclick="switchCostSubTab('cost-optimization')" id="subtab-cost-optimization" class="cost-subtab bg-slate-50/80 text-slate-700 hover:bg-purple-50/70 hover:text-[#7C017D] border-slate-200/80 flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap border">
+                Cost Optimization
+              </button>
+              <button onclick="switchCostSubTab('expense-monitoring')" id="subtab-expense-monitoring" class="cost-subtab bg-slate-50/80 text-slate-700 hover:bg-purple-50/70 hover:text-[#7C017D] border-slate-200/80 flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap border">
+                Expense Monitoring
+              </button>
+              <button onclick="switchCostSubTab('budget-utilization')" id="subtab-budget-utilization" class="cost-subtab bg-slate-50/80 text-slate-700 hover:bg-purple-50/70 hover:text-[#7C017D] border-slate-200/80 flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap border">
+                Budget Utilization
+              </button>
+            </div>
+
+            <div class="hidden xl:flex items-center gap-2 text-[11px] font-semibold text-slate-500 px-2 shrink-0 whitespace-nowrap">
+              <span class="w-2 h-2 rounded-full bg-[#7C017D]"></span>
+              <span>Active: <strong id="costActiveLabel" class="text-[#7C017D] capitalize">Cost Management</strong></span>
+            </div>
+          </div>
+
+          <!-- 1.1 COST MANAGEMENT CARD -->
+          <div id="card-cost-management" class="cost-card bg-white border border-purple-200/80 rounded-2xl shadow-md hover:shadow-lg transition-shadow overflow-hidden relative">
+            <div class="h-1.5 w-full bg-gradient-to-r from-purple-700 via-fuchsia-600 to-purple-800"></div>
+            <div class="p-6 space-y-6">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <h3 class="font-bold text-lg text-[#2b0830]">AI Cost Management &amp; Forecast Engine</h3>
+                  <p class="text-xs text-slate-500 mt-0.5">XGBoost recursive regression with lag features and 95% confidence intervals</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="bg-red-50 text-red-700 border border-red-200 text-xs px-3 py-1 font-semibold rounded-full flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    <span>+14.46% MoM Forecast (<span id="cmRegionLabel">Global</span> - Software &amp; IT)</span>
+                  </span>
+                  <button onclick="refreshCostCard()" class="text-slate-400 hover:text-[#7C017D] transition-colors p-1 cursor-pointer" title="Refresh AI Forecast">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 4 KPI Metric Cards -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-slate-50/80 border border-slate-200/80 p-4 rounded-xl shadow-xs">
+                  <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Current Month Cost</span>
+                  <span class="text-2xl font-extrabold text-slate-900 font-mono" id="cmCurrentCost">$1,240,000.00</span>
+                  <span class="text-[11px] text-slate-500 block mt-1">Closed actuals MTD</span>
+                </div>
+
+                <div class="bg-purple-50/80 border border-purple-200/80 p-4 rounded-xl shadow-xs">
+                  <span class="text-xs font-semibold text-purple-900 uppercase tracking-wider block mb-1">Predicted Next Month Cost</span>
+                  <span class="text-2xl font-extrabold text-purple-700 font-mono" id="cmPredictedCost">$1,419,304.00</span>
+                  <span class="text-[11px] text-purple-700 font-medium block mt-1">XGBoost ML Projections</span>
+                </div>
+
+                <div class="bg-slate-50/80 border border-slate-200/80 p-4 rounded-xl shadow-xs">
+                  <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Cost Variance</span>
+                  <div class="flex items-baseline gap-2">
+                    <span class="text-2xl font-extrabold text-red-600 font-mono" id="cmVariance">+$179,304.00</span>
+                    <span class="text-xs font-bold text-red-600">(OVER BUDGET)</span>
+                  </div>
+                  <span class="text-[11px] text-slate-500 block mt-1">Forecast vs Current Baseline</span>
+                </div>
+
+                <div class="bg-emerald-50/60 border border-emerald-200/80 p-4 rounded-xl shadow-xs flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between mb-1">
+                      <span class="text-xs font-semibold text-emerald-900 uppercase tracking-wider block">Prev Month Accuracy</span>
+                      <span class="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full">
+                        <svg class="w-3 h-3 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                        High Precision
+                      </span>
+                    </div>
+                    <span class="text-2xl font-extrabold text-emerald-700 font-mono" id="cmAccuracy">96.4%</span>
+                  </div>
+                  <div class="mt-2 text-[11px] text-emerald-800/90 font-medium border-t border-emerald-200/60 pt-1.5 flex justify-between font-mono">
+                    <span>Actual: $1,180,000</span>
+                    <span>Pred: $1,137,500</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Chart & Drivers Layout -->
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Forecast Chart -->
+                <div class="lg:col-span-7 bg-slate-50/60 border border-slate-200 p-4 rounded-xl space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">6-Month Historical Spend vs 3-Month ML Projections</span>
+                    <span class="text-[10px] text-purple-700 font-bold bg-purple-100 px-2 py-0.5 rounded-full">95% Confidence Band</span>
+                  </div>
+                  <div class="h-64">
+                    <canvas id="costForecastChart"></canvas>
+                  </div>
+                </div>
+
+                <!-- Top Cost Drivers -->
+                <div class="lg:col-span-5 space-y-4 flex flex-col justify-between">
+                  <div class="space-y-3 bg-slate-50/60 border border-slate-200 p-4 rounded-xl">
+                    <p class="text-xs font-bold text-purple-900 uppercase tracking-wider flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-purple-600"></span>
+                      Top Cost Drivers (Ranked by Impact)
+                    </p>
+                    <div class="space-y-3" id="costDriversContainer">
+                      <!-- Driver 1 -->
+                      <div class="space-y-1 pb-2 border-b border-slate-100">
+                        <div class="flex justify-between items-center text-xs">
+                          <span class="text-slate-700 font-semibold">Direct Project Delivery &amp; Contractors</span>
+                          <span class="text-slate-900 font-bold font-mono">$640,000.00 <span class="text-purple-700 text-[11px]">(51.6%)</span></span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
+                          <div class="bg-purple-700 h-full rounded-full" style="width: 51.6%"></div>
+                        </div>
+                      </div>
+                      <!-- Driver 2 -->
+                      <div class="space-y-1 pb-2 border-b border-slate-100">
+                        <div class="flex justify-between items-center text-xs">
+                          <span class="text-slate-700 font-semibold">Cloud Compute &amp; Enterprise SaaS</span>
+                          <span class="text-slate-900 font-bold font-mono">$320,000.00 <span class="text-purple-700 text-[11px]">(25.8%)</span></span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
+                          <div class="bg-purple-700 h-full rounded-full" style="width: 25.8%"></div>
+                        </div>
+                      </div>
+                      <!-- Driver 3 -->
+                      <div class="space-y-1 pb-2 border-b border-slate-100">
+                        <div class="flex justify-between items-center text-xs">
+                          <span class="text-slate-700 font-semibold">Corporate Travel &amp; Client Engagements</span>
+                          <span class="text-slate-900 font-bold font-mono">$160,000.00 <span class="text-purple-700 text-[11px]">(12.9%)</span></span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
+                          <div class="bg-purple-700 h-full rounded-full" style="width: 12.9%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Executive AI Narrative -->
+                  <div class="bg-purple-50/90 rounded-xl p-4 text-xs text-purple-950 leading-relaxed border border-purple-200/80 shadow-xs">
+                    <div class="font-bold text-purple-900 text-[11px] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                      <svg class="w-3.5 h-3.5 text-[#7C017D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                      Executive AI Narrative
+                    </div>
+                    <p class="italic text-purple-950 font-medium" id="cmNarrativeText">
+                      "XGBoost regressor projects a 14.46% cost expansion in next month's run-rate. Primary escalation stems from Q4 cloud server scaling and annual advisory renewals. Reallocating $85,000 in unused contractor capacity will restore margin targets."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1.2 SPEND ANALYSIS CARD -->
+          <div id="card-spend-analysis" class="cost-card hidden bg-white border border-purple-200/80 rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow text-slate-900 relative overflow-hidden space-y-6">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-700 via-fuchsia-600 to-purple-800"></div>
+            
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
+              <div>
+                <h2 class="text-lg font-bold tracking-tight text-[#2b0830]">
+                  AI Spend Analysis &amp; Concentration Visibility
+                </h2>
+                <p class="text-xs text-slate-500">Spend visibility, concentration risk (HHI), and off-contract leakage monitoring</p>
+              </div>
+              <button onclick="toast('Spend Analysis refreshed.')" class="p-2 text-slate-400 hover:text-purple-700 bg-slate-50 hover:bg-purple-50 border border-slate-200 rounded-lg transition-colors cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+              </button>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-slate-50/80 border border-slate-200/80 p-4 rounded-xl shadow-xs">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Total Organization Spend</span>
+                <span class="text-2xl font-extrabold text-slate-900 font-mono">$11,240,000</span>
+                <div class="flex items-center gap-1.5 mt-2 text-xs text-purple-700 font-medium">
+                  <span>Scope: All Global Divisions</span>
+                </div>
+              </div>
+
+              <div class="bg-slate-50/80 border border-slate-200/80 p-4 rounded-xl shadow-xs">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Concentration Risk (HHI)</span>
+                <span class="text-xl font-extrabold text-amber-700">IT Infrastructure</span>
+                <div class="flex items-center gap-1.5 mt-2 text-xs text-amber-800 font-medium">
+                  <svg class="w-3.5 h-3.5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                  <span>Moderate Concentration (HHI: 0.24)</span>
+                </div>
+              </div>
+
+              <div class="bg-slate-50/80 border border-slate-200/80 p-4 rounded-xl shadow-xs">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Off-Contract Spend %</span>
+                <span class="text-2xl font-extrabold text-rose-600 font-mono">14.2%</span>
+                <div class="flex items-center gap-1.5 mt-2 text-xs text-slate-600 font-medium">
+                  <span>Contracted Pool: $9,650,000</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- BU Distribution & Narrative -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div class="bg-slate-50/60 border border-slate-200 p-4 rounded-xl space-y-3.5">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Business Unit Spend Distribution</h3>
+                  <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Trajectory</span>
+                </div>
+                <div class="space-y-3.5">
+                  <!-- BU 1 -->
+                  <div class="text-xs space-y-1.5">
+                    <div class="flex justify-between items-center font-medium text-slate-700">
+                      <div class="flex items-center gap-2">
+                        <span class="font-bold text-slate-800">IT &amp; Digital Engineering</span>
+                        <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Strategic</span>
+                        <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200">
+                          Growing
+                        </span>
+                      </div>
+                      <span class="text-slate-900 font-extrabold font-mono">$4,320,000 (38.5%)</span>
+                    </div>
+                    <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                      <div class="bg-gradient-to-r from-purple-600 via-fuchsia-600 to-purple-800 h-full rounded-full" style="width: 38.5%"></div>
+                    </div>
+                  </div>
+                  <!-- BU 2 -->
+                  <div class="text-xs space-y-1.5">
+                    <div class="flex justify-between items-center font-medium text-slate-700">
+                      <div class="flex items-center gap-2">
+                        <span class="font-bold text-slate-800">Financial Services &amp; Banking LOB</span>
+                        <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Core</span>
+                        <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                          Stable
+                        </span>
+                      </div>
+                      <span class="text-slate-900 font-extrabold font-mono">$3,150,000 (28.0%)</span>
+                    </div>
+                    <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                      <div class="bg-gradient-to-r from-purple-600 via-fuchsia-600 to-purple-800 h-full rounded-full" style="width: 28%"></div>
+                    </div>
+                  </div>
+                  <!-- BU 3 -->
+                  <div class="text-xs space-y-1.5">
+                    <div class="flex justify-between items-center font-medium text-slate-700">
+                      <div class="flex items-center gap-2">
+                        <span class="font-bold text-slate-800">Telecom &amp; Network Infrastructure</span>
+                        <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Core</span>
+                        <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                          Declining
+                        </span>
+                      </div>
+                      <span class="text-slate-900 font-extrabold font-mono">$2,210,000 (19.7%)</span>
+                    </div>
+                    <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                      <div class="bg-gradient-to-r from-purple-600 via-fuchsia-600 to-purple-800 h-full rounded-full" style="width: 19.7%"></div>
+                    </div>
+                  </div>
+                  <!-- BU 4 -->
+                  <div class="text-xs space-y-1.5">
+                    <div class="flex justify-between items-center font-medium text-slate-700">
+                      <div class="flex items-center gap-2">
+                        <span class="font-bold text-slate-800">Operations &amp; Admin Facilities</span>
+                        <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Support</span>
+                        <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                          Stable
+                        </span>
+                      </div>
+                      <span class="text-slate-900 font-extrabold font-mono">$1,560,000 (13.8%)</span>
+                    </div>
+                    <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                      <div class="bg-gradient-to-r from-purple-600 via-fuchsia-600 to-purple-800 h-full rounded-full" style="width: 13.8%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Executive Spend Insight -->
+              <div class="bg-purple-50/80 border border-purple-200/80 p-4 rounded-xl flex flex-col justify-between shadow-xs">
+                <div>
+                  <h3 class="text-xs font-bold text-purple-900 uppercase tracking-wider flex items-center gap-1.5 mb-2">
+                    Executive AI Spend Insight
+                  </h3>
+                  <p class="text-xs text-purple-950 font-medium leading-relaxed italic">
+                    "Supplier concentration in IT &amp; Cloud accounts for 38.5% of total spend. Off-contract software purchases generated $158,000 in unnecessary price premiums. Directing these purchases through pre-negotiated master services agreements will yield immediate 8-12% baseline savings."
+                  </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-purple-200/60 text-[11px] text-purple-800/70 font-medium">
+                  * Generated dynamically by LLM Engine based on MySQL spend records &amp; active contracts.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1.3 COST OPTIMIZATION CARD -->
+          <div id="card-cost-optimization" class="cost-card hidden bg-white border border-purple-200/80 rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow text-slate-900 relative overflow-hidden space-y-6">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-600 via-purple-700 to-fuchsia-600"></div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 class="font-bold text-lg text-[#2b0830]">
+                  AI Cost Optimization &amp; Savings Opportunity Engine
+                </h3>
+                <p class="text-xs text-slate-500 mt-0.5">
+                  Identifies duplicate supplier invoices, dormant SaaS accounts, and supplier volume contract discounts
+                </p>
+              </div>
+              <button onclick="toast('Savings opportunities rescanned.')" class="p-2 text-slate-400 hover:text-purple-700 bg-slate-50 hover:bg-purple-50 border border-slate-200 rounded-lg transition-colors cursor-pointer self-start sm:self-auto">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+              </button>
+            </div>
+
+            <!-- 3 KPI Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-emerald-50/70 border border-emerald-200/80 p-4 rounded-xl shadow-xs">
+                <span class="text-xs font-semibold text-emerald-900 uppercase tracking-wider block mb-1">Total Identified Savings</span>
+                <span class="text-2xl font-extrabold text-emerald-700 font-mono">$485,000</span>
+                <span class="text-[11px] text-emerald-800 block mt-1">Across 4 ranked optimization initiatives</span>
+              </div>
+
+              <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl shadow-xs">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Anomaly Patterns Detected</span>
+                <span class="text-2xl font-extrabold text-slate-900 font-mono">12 Flags</span>
+                <span class="text-[11px] text-slate-500 block mt-1">Flagged in multi-entity supplier audits</span>
+              </div>
+
+              <div class="bg-purple-50/80 border border-purple-200/80 p-4 rounded-xl shadow-xs">
+                <span class="text-xs font-semibold text-purple-900 uppercase tracking-wider block mb-1">Utilization Reallocation</span>
+                <span class="text-2xl font-extrabold text-purple-800 font-mono">$210,000</span>
+                <span class="text-[11px] text-purple-700 block mt-1">Potential budget reallocation identified</span>
+              </div>
+            </div>
+
+            <!-- 4 Ranked Initiatives -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5">
+              <!-- Opp 1 -->
+              <div onclick="openModal(0)" class="group bg-slate-50/70 hover:bg-white border border-slate-200/90 hover:border-purple-400 rounded-xl p-4 space-y-2.5 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer">
+                <div>
+                  <div class="flex justify-between items-center text-[11px] font-bold text-slate-500 mb-1">
+                    <span>Opp #1</span>
+                    <span class="text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full font-bold">Immediate</span>
+                  </div>
+                  <h4 class="font-bold text-slate-900 text-xs">Duplicate SaaS &amp; Cloud Licensing</h4>
+                  <p class="text-[11px] text-slate-500 mt-1">18 dormant licenses across Jira, Figma &amp; Datadog</p>
+                </div>
+                <div class="pt-2 border-t border-slate-200/80 flex items-center justify-between">
+                  <span class="text-sm font-extrabold text-emerald-700 font-mono">+$84,000/yr</span>
+                  <span class="text-[11px] text-purple-700 font-semibold group-hover:underline">View Plan →</span>
+                </div>
+              </div>
+
+              <!-- Opp 2 -->
+              <div onclick="openModal(1)" class="group bg-slate-50/70 hover:bg-white border border-slate-200/90 hover:border-purple-400 rounded-xl p-4 space-y-2.5 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer">
+                <div>
+                  <div class="flex justify-between items-center text-[11px] font-bold text-slate-500 mb-1">
+                    <span>Opp #2</span>
+                    <span class="text-purple-700 bg-purple-100 px-2 py-0.5 rounded-full font-bold">Near Term</span>
+                  </div>
+                  <h4 class="font-bold text-slate-900 text-xs">AWS Reserved Instance Restructuring</h4>
+                  <p class="text-[11px] text-slate-500 mt-1">Shift on-demand EC2 workloads to 1-yr Savings Plans</p>
+                </div>
+                <div class="pt-2 border-t border-slate-200/80 flex items-center justify-between">
+                  <span class="text-sm font-extrabold text-emerald-700 font-mono">+$195,000/yr</span>
+                  <span class="text-[11px] text-purple-700 font-semibold group-hover:underline">View Plan →</span>
+                </div>
+              </div>
+
+              <!-- Opp 3 -->
+              <div onclick="openModal(2)" class="group bg-slate-50/70 hover:bg-white border border-slate-200/90 hover:border-purple-400 rounded-xl p-4 space-y-2.5 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer">
+                <div>
+                  <div class="flex justify-between items-center text-[11px] font-bold text-slate-500 mb-1">
+                    <span>Opp #3</span>
+                    <span class="text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full font-bold">Strategic</span>
+                  </div>
+                  <h4 class="font-bold text-slate-900 text-xs">Off-Contract Vendor Consolidation</h4>
+                  <p class="text-[11px] text-slate-500 mt-1">Merge 4 staffing agencies into 1 master SLA</p>
+                </div>
+                <div class="pt-2 border-t border-slate-200/80 flex items-center justify-between">
+                  <span class="text-sm font-extrabold text-emerald-700 font-mono">+$142,000/yr</span>
+                  <span class="text-[11px] text-purple-700 font-semibold group-hover:underline">View Plan →</span>
+                </div>
+              </div>
+
+              <!-- Opp 4 -->
+              <div onclick="openModal(3)" class="group bg-slate-50/70 hover:bg-white border border-slate-200/90 hover:border-purple-400 rounded-xl p-4 space-y-2.5 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer">
+                <div>
+                  <div class="flex justify-between items-center text-[11px] font-bold text-slate-500 mb-1">
+                    <span>Opp #4</span>
+                    <span class="text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full font-bold">Immediate</span>
+                  </div>
+                  <h4 class="font-bold text-slate-900 text-xs">Early Payment 2/10 Net 30 Rebates</h4>
+                  <p class="text-[11px] text-slate-500 mt-1">Capture 2% early cash settlement with top 10 suppliers</p>
+                </div>
+                <div class="pt-2 border-t border-slate-200/80 flex items-center justify-between">
+                  <span class="text-sm font-extrabold text-emerald-700 font-mono">+$64,000/yr</span>
+                  <span class="text-[11px] text-purple-700 font-semibold group-hover:underline">View Plan →</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1.4 EXPENSE MONITORING CARD -->
+          <div id="card-expense-monitoring" class="cost-card hidden bg-white border border-purple-200/80 rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow text-slate-900 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+              <div>
+                <h2 class="text-base font-extrabold text-slate-900 tracking-tight">
+                  Expense Monitoring &amp; Milestone PO Intelligence
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">
+                  Real-time milestone tracking, Purchase Order (PO) budget ceiling monitoring, Isolation Forest ML anomaly scoring, and duplicate invoice audit
+                </p>
+              </div>
+              <button onclick="toast('Expense monitoring scan completed.')" class="p-2 text-slate-400 hover:text-purple-700 bg-slate-50 hover:bg-purple-50 border border-slate-200 rounded-lg transition-colors cursor-pointer self-start md:self-auto">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+              </button>
+            </div>
+
+            <!-- 4 KPIs -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="bg-slate-50/80 border border-slate-200/80 p-4 rounded-xl shadow-xs">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Expense Anomaly Rate</span>
+                <span class="text-2xl font-extrabold text-slate-900 font-mono">4.2%</span>
+                <span class="text-xs text-purple-700 font-medium block mt-1">Scanned 1,420 Expense Records</span>
+              </div>
+
+              <div class="bg-slate-50/80 border border-slate-200/80 p-4 rounded-xl shadow-xs">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">PO Numbers Tracked</span>
+                <span class="text-2xl font-extrabold text-slate-900 font-mono">18 Active POs</span>
+                <span class="text-xs text-slate-500 block mt-1">100% Milestone Compliance</span>
+              </div>
+
+              <div class="bg-slate-50/80 border border-slate-200/80 p-4 rounded-xl shadow-xs">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Anomalies Detected</span>
+                <span class="text-2xl font-extrabold text-amber-600 font-mono" id="anomalyCountBadge">6 Items</span>
+                <span class="text-xs text-amber-700 font-medium block mt-1">Total Risk: $84,500</span>
+              </div>
+
+              <div class="bg-emerald-50/80 border border-emerald-200/80 p-4 rounded-xl shadow-xs">
+                <span class="text-xs font-semibold text-emerald-900 uppercase tracking-wider block mb-1">Prevented Leakage MTD</span>
+                <span class="text-2xl font-extrabold text-emerald-700 font-mono">$42,300</span>
+                <span class="text-xs text-emerald-800 font-medium block mt-1">Auto-rejected duplicate claims</span>
+              </div>
+            </div>
+
+            <!-- Anomaly Table with Severity Filter -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800 uppercase tracking-wider">Isolation Forest Anomaly Queue</span>
+                <div class="flex items-center gap-1">
+                  <button onclick="filterAnomalies('all')" class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-[#7C017D] text-white">All</button>
+                  <button onclick="filterAnomalies('Critical')" class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-red-100 text-red-700">Critical</button>
+                  <button onclick="filterAnomalies('High')" class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-orange-100 text-orange-700">High</button>
+                </div>
+              </div>
+
+              <div class="overflow-x-auto border border-slate-200 rounded-xl">
+                <table class="w-full text-xs text-left">
+                  <thead class="bg-slate-100/80 text-slate-700 font-semibold border-b border-slate-200">
+                    <tr>
+                      <th class="p-3">Ref ID</th>
+                      <th class="p-3">Employee / Vendor</th>
+                      <th class="p-3">Category</th>
+                      <th class="p-3">Amount</th>
+                      <th class="p-3">ML Flag Reason</th>
+                      <th class="p-3">Severity</th>
+                      <th class="p-3 text-right">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-100" id="anomalyTableBody">
+                    <tr class="hover:bg-purple-50/30" id="anom-row-1">
+                      <td class="p-3 font-mono font-bold text-[#7C017D]">EXP-9041</td>
+                      <td class="p-3 font-semibold text-slate-800">TechCorp Solutions</td>
+                      <td class="p-3 text-slate-600">IT Infrastructure</td>
+                      <td class="p-3 font-mono font-bold text-slate-900">$24,500.00</td>
+                      <td class="p-3 text-red-600 font-medium">Duplicate Invoice Reference (INV-2024-88)</td>
+                      <td class="p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 text-red-800">Critical</span></td>
+                      <td class="p-3 text-right">
+                        <button onclick="dismissAnomaly('anom-row-1', 'EXP-9041')" class="text-xs text-purple-700 hover:text-purple-900 font-bold bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-200">Resolve</button>
+                      </td>
+                    </tr>
+                    <tr class="hover:bg-purple-50/30" id="anom-row-2">
+                      <td class="p-3 font-mono font-bold text-[#7C017D]">EXP-9042</td>
+                      <td class="p-3 font-semibold text-slate-800">Ahmad Al-Mansoor</td>
+                      <td class="p-3 text-slate-600">Client Entertainment</td>
+                      <td class="p-3 font-mono font-bold text-slate-900">$3,400.00</td>
+                      <td class="p-3 text-orange-600 font-medium">Exceeds Daily Meal Policy Limit by 340%</td>
+                      <td class="p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-100 text-orange-800">High</span></td>
+                      <td class="p-3 text-right">
+                        <button onclick="dismissAnomaly('anom-row-2', 'EXP-9042')" class="text-xs text-purple-700 hover:text-purple-900 font-bold bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-200">Resolve</button>
+                      </td>
+                    </tr>
+                    <tr class="hover:bg-purple-50/30" id="anom-row-3">
+                      <td class="p-3 font-mono font-bold text-[#7C017D]">EXP-9043</td>
+                      <td class="p-3 font-semibold text-slate-800">Global Cloud AWS</td>
+                      <td class="p-3 text-slate-600">Cloud Hosting</td>
+                      <td class="p-3 font-mono font-bold text-slate-900">$48,200.00</td>
+                      <td class="p-3 text-orange-600 font-medium">Unusual 68% MoM Surge in GPU Instances</td>
+                      <td class="p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-100 text-orange-800">High</span></td>
+                      <td class="p-3 text-right">
+                        <button onclick="dismissAnomaly('anom-row-3', 'EXP-9043')" class="text-xs text-purple-700 hover:text-purple-900 font-bold bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-200">Resolve</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1.5 BUDGET UTILIZATION CARD -->
+          <div id="card-budget-utilization" class="cost-card hidden bg-white border border-purple-200/80 rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow text-slate-900 space-y-6 relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-700 via-fuchsia-600 to-purple-800"></div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 class="font-bold text-lg text-[#2b0830]">AI Budget Utilization &amp; Variance Tracker</h3>
+                <p class="text-xs text-slate-500 mt-0.5">Recursive reforecasting across all LOB cost centers vs FY2025 allocations</p>
+              </div>
+              <button onclick="toast('Budget health recalculated.')" class="p-2 text-slate-400 hover:text-purple-700 bg-slate-50 hover:bg-purple-50 border border-slate-200 rounded-lg transition-colors cursor-pointer self-start sm:self-auto">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+              </button>
+            </div>
+
+            <!-- 5 KPIs -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3.5">
+              <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl">
+                <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">Total FY Budget</span>
+                <span class="text-xl font-extrabold text-slate-900 font-mono">$12,500,000</span>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl">
+                <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">Actual Spend</span>
+                <span class="text-xl font-extrabold text-purple-700 font-mono">$6,462,500</span>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl">
+                <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">Overall Utilization</span>
+                <span class="text-xl font-extrabold text-emerald-700 font-mono">51.7%</span>
+              </div>
+              <div class="bg-purple-50 border border-purple-200 p-3.5 rounded-xl">
+                <span class="text-[10px] font-semibold text-purple-900 uppercase tracking-wider block mb-1">Projected Gap</span>
+                <span class="text-xl font-extrabold text-red-600 font-mono">+$420,000</span>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl">
+                <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">Cost Center Status</span>
+                <span class="text-xs font-bold text-slate-800 block mt-1">4 On Track · 2 At Risk</span>
+              </div>
+            </div>
+
+            <!-- Department Budget Health Table -->
+            <div class="overflow-x-auto border border-slate-200 rounded-xl">
+              <table class="w-full text-xs text-left">
+                <thead class="bg-slate-100/80 text-slate-700 font-semibold border-b border-slate-200">
+                  <tr>
+                    <th class="p-3">Department LOB</th>
+                    <th class="p-3">Allocated Budget</th>
+                    <th class="p-3">Actual Spend</th>
+                    <th class="p-3">Forecasted Year-End</th>
+                    <th class="p-3">Utilization Progress</th>
+                    <th class="p-3 text-right">Health Status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr class="hover:bg-slate-50">
+                    <td class="p-3 font-bold text-slate-900">Engineering &amp; IT</td>
+                    <td class="p-3 font-mono font-semibold text-slate-700">$5,000,000</td>
+                    <td class="p-3 font-mono font-bold text-slate-900">$2,850,000</td>
+                    <td class="p-3 font-mono font-bold text-red-600">$5,320,000</td>
+                    <td class="p-3 w-48">
+                      <div class="flex items-center gap-2">
+                        <div class="flex-1 bg-slate-200 h-2 rounded-full overflow-hidden">
+                          <div class="bg-orange-500 h-full rounded-full" style="width: 57%"></div>
+                        </div>
+                        <span class="font-mono text-[11px] font-bold text-slate-700">57.0%</span>
+                      </div>
+                    </td>
+                    <td class="p-3 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-100 text-orange-800">At Risk</span></td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="p-3 font-bold text-slate-900">Digital Banking Services</td>
+                    <td class="p-3 font-mono font-semibold text-slate-700">$3,500,000</td>
+                    <td class="p-3 font-mono font-bold text-slate-900">$1,680,000</td>
+                    <td class="p-3 font-mono font-bold text-emerald-700">$3,420,000</td>
+                    <td class="p-3 w-48">
+                      <div class="flex items-center gap-2">
+                        <div class="flex-1 bg-slate-200 h-2 rounded-full overflow-hidden">
+                          <div class="bg-emerald-500 h-full rounded-full" style="width: 48%"></div>
+                        </div>
+                        <span class="font-mono text-[11px] font-bold text-slate-700">48.0%</span>
+                      </div>
+                    </td>
+                    <td class="p-3 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">On Track</span></td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="p-3 font-bold text-slate-900">Sales &amp; Global Growth</td>
+                    <td class="p-3 font-mono font-semibold text-slate-700">$2,200,000</td>
+                    <td class="p-3 font-mono font-bold text-slate-900">$1,250,000</td>
+                    <td class="p-3 font-mono font-bold text-red-600">$2,380,000</td>
+                    <td class="p-3 w-48">
+                      <div class="flex items-center gap-2">
+                        <div class="flex-1 bg-slate-200 h-2 rounded-full overflow-hidden">
+                          <div class="bg-red-500 h-full rounded-full" style="width: 56.8%"></div>
+                        </div>
+                        <span class="font-mono text-[11px] font-bold text-slate-700">56.8%</span>
+                      </div>
+                    </td>
+                    <td class="p-3 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 text-red-800">Over Budget</span></td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="p-3 font-bold text-slate-900">General &amp; Administrative</td>
+                    <td class="p-3 font-mono font-semibold text-slate-700">$1,800,000</td>
+                    <td class="p-3 font-mono font-bold text-slate-900">$682,500</td>
+                    <td class="p-3 font-mono font-bold text-emerald-700">$1,650,000</td>
+                    <td class="p-3 w-48">
+                      <div class="flex items-center gap-2">
+                        <div class="flex-1 bg-slate-200 h-2 rounded-full overflow-hidden">
+                          <div class="bg-emerald-500 h-full rounded-full" style="width: 37.9%"></div>
+                        </div>
+                        <span class="font-mono text-[11px] font-bold text-slate-700">37.9%</span>
+                      </div>
+                    </td>
+                    <td class="p-3 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">On Track</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── AGENT CONTAINER 2: CASH FLOW & WORKING CAPITAL ─ -->
+        <div id="view-cashflow-workingcapital" class="agent-view hidden space-y-5">
+          <!-- Sub-Use Case Navigation Bar -->
+          <div class="bg-white border border-slate-200/90 rounded-2xl p-2 flex items-center justify-between gap-3 shadow-xs overflow-x-auto custom-scrollbar">
+            <div class="flex items-center gap-1.5 flex-nowrap shrink-0">
+              <button onclick="switchCashflowSubTab('cash-flow')" id="subtab-cash-flow" class="cash-subtab subtab-active flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap border">
+                Cash Flow Forecast
+              </button>
+              <button onclick="switchCashflowSubTab('receivables')" id="subtab-receivables" class="cash-subtab bg-slate-50/80 text-slate-700 hover:bg-purple-50/70 hover:text-[#7C017D] border-slate-200/80 flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap border">
+                Receivables &amp; DSO
+              </button>
+              <button onclick="switchCashflowSubTab('collections')" id="subtab-collections" class="cash-subtab bg-slate-50/80 text-slate-700 hover:bg-purple-50/70 hover:text-[#7C017D] border-slate-200/80 flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap border">
+                Predictive Collections
+              </button>
+              <button onclick="switchCashflowSubTab('working-capital')" id="subtab-working-capital" class="cash-subtab bg-slate-50/80 text-slate-700 hover:bg-purple-50/70 hover:text-[#7C017D] border-slate-200/80 flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap border">
+                Working Capital &amp; CCC
+              </button>
+              <button onclick="switchCashflowSubTab('liquidity-risk')" id="subtab-liquidity-risk" class="cash-subtab bg-slate-50/80 text-slate-700 hover:bg-purple-50/70 hover:text-[#7C017D] border-slate-200/80 flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap border">
+                Liquidity Risk &amp; Stress Test
+              </button>
+            </div>
+
+            <div class="hidden xl:flex items-center gap-2 text-[11px] font-semibold text-slate-500 px-2 shrink-0 whitespace-nowrap">
+              <span class="w-2 h-2 rounded-full bg-[#7C017D]"></span>
+              <span>Active: <strong id="cashActiveLabel" class="text-[#7C017D] capitalize">Cash Flow Forecast</strong></span>
+            </div>
+          </div>
+
+          <!-- 2.1 13-WEEK CASH FLOW CARD -->
+          <div id="card-cash-flow" class="cash-card bg-white border border-blue-200/80 rounded-2xl shadow-md p-6 space-y-6 relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600"></div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 class="font-bold text-lg text-slate-900">13-Week Cash Flow Forecast &amp; Liquidity Horizon</h3>
+                <p class="text-xs text-slate-500 mt-0.5">Gradient Boosting projection with rolling recursive reforecasting</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="bg-emerald-50 text-emerald-800 border border-emerald-300 text-xs px-3 py-1 font-semibold rounded-full font-mono">
+                  Horizon: 2026-W11 → 2026-W24
+                </span>
+                <button onclick="toast('Cash flow models re-evaluated.')" class="p-1.5 text-slate-400 hover:text-blue-700 rounded-lg cursor-pointer">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- 4 Metrics -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">Current Cash Reserve</span>
+                <span class="text-2xl font-extrabold text-slate-900 font-mono">$4,850,000</span>
+              </div>
+              <div class="bg-emerald-50/80 border border-emerald-200 p-4 rounded-xl">
+                <span class="text-[10px] font-semibold text-emerald-800 uppercase tracking-wider block mb-1">13w Total Inflows</span>
+                <span class="text-2xl font-extrabold text-emerald-700 font-mono">+$3,450,000</span>
+              </div>
+              <div class="bg-rose-50/80 border border-rose-200 p-4 rounded-xl">
+                <span class="text-[10px] font-semibold text-rose-800 uppercase tracking-wider block mb-1">13w Total Outflows</span>
+                <span class="text-2xl font-extrabold text-rose-700 font-mono">-$2,830,000</span>
+              </div>
+              <div class="bg-blue-50/80 border border-blue-200 p-4 rounded-xl">
+                <span class="text-[10px] font-semibold text-blue-900 uppercase tracking-wider block mb-1">Net Projected Cash Flow</span>
+                <span class="text-2xl font-extrabold text-blue-700 font-mono">+$620,000</span>
+              </div>
+            </div>
+
+            <!-- 13-Week Chart -->
+            <div class="bg-slate-50/60 border border-slate-200 p-4 rounded-xl space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Weekly Cash Inflows vs Outflows vs Ending Liquidity</span>
+                <span class="text-[10px] text-blue-700 font-bold bg-blue-100 px-2 py-0.5 rounded-full">Model WAPE: 3.8%</span>
+              </div>
+              <div class="h-64">
+                <canvas id="cashFlowChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Reforecast Simulation Box -->
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 p-4 rounded-xl space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-blue-950 uppercase tracking-wider flex items-center gap-1.5">
+                  <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                  Recursive Reforecasting Sandbox
+                </span>
+                <span class="text-[11px] text-blue-700 font-semibold">Enter closed week actuals to reroll future 13-week horizon</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-3">
+                <input type="text" value="2026-W11" class="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-mono font-bold text-slate-800 w-28" />
+                <input type="number" placeholder="Actual Inflow ($)" id="simInflow" value="280000" class="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-mono font-bold text-slate-800 w-40" />
+                <input type="number" placeholder="Actual Outflow ($)" id="simOutflow" value="215000" class="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-mono font-bold text-slate-800 w-40" />
+                <button onclick="simulateReforecast()" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-lg shadow-xs cursor-pointer">
+                  Recalibrate Forecast
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2.2 RECEIVABLES & DSO CARD -->
+          <div id="card-receivables" class="cash-card hidden bg-white border border-amber-200/80 rounded-2xl p-6 shadow-md space-y-6 relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-600 via-orange-500 to-amber-700"></div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h3 class="font-bold text-lg text-slate-900">AR Aging &amp; Collection Efficiency Monitor</h3>
+                <p class="text-xs text-slate-500 mt-0.5">DSO Performance &amp; Random Forest Default Risk Scoring</p>
+              </div>
+              <span class="bg-amber-50 text-amber-800 border border-amber-300 text-xs px-3 py-1 font-semibold rounded-full">
+                DSO: 42.5 Days (Target: 35.0d)
+              </span>
+            </div>
+
+            <!-- 3 Metrics -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">Total Outstanding AR</span>
+                <span class="text-2xl font-extrabold text-slate-900 font-mono">$3,150,000</span>
+              </div>
+              <div class="bg-orange-50/80 border border-orange-200 p-4 rounded-xl">
+                <span class="text-[10px] font-semibold text-orange-700 uppercase tracking-wider block mb-1">Overdue AR (28.3%)</span>
+                <span class="text-2xl font-extrabold text-orange-800 font-mono">$890,000</span>
+              </div>
+              <div class="bg-emerald-50/80 border border-emerald-200 p-4 rounded-xl">
+                <span class="text-[10px] font-semibold text-emerald-700 uppercase tracking-wider block mb-1">Collection Efficiency Index</span>
+                <span class="text-2xl font-extrabold text-emerald-800 font-mono">88.4%</span>
+              </div>
+            </div>
+
+            <!-- Aging Buckets -->
+            <div class="space-y-2">
+              <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Financial Aging Buckets</span>
+              <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center space-y-1">
+                  <div class="font-bold text-slate-700 text-xs">Current (0-30d)</div>
+                  <div class="text-base font-extrabold text-emerald-700 font-mono">$2,260,000</div>
+                  <div class="text-[10px] text-slate-500">71.7% · 142 Invoices</div>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center space-y-1">
+                  <div class="font-bold text-slate-700 text-xs">31-60 Days</div>
+                  <div class="text-base font-extrabold text-slate-900 font-mono">$510,000</div>
+                  <div class="text-[10px] text-slate-500">16.2% · 32 Invoices</div>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center space-y-1">
+                  <div class="font-bold text-slate-700 text-xs">61-90 Days</div>
+                  <div class="text-base font-extrabold text-orange-700 font-mono">$240,000</div>
+                  <div class="text-[10px] text-slate-500">7.6% · 15 Invoices</div>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center space-y-1">
+                  <div class="font-bold text-slate-700 text-xs">91-120 Days</div>
+                  <div class="text-base font-extrabold text-rose-600 font-mono">$95,000</div>
+                  <div class="text-[10px] text-slate-500">3.0% · 6 Invoices</div>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center space-y-1">
+                  <div class="font-bold text-slate-700 text-xs">120+ Days</div>
+                  <div class="text-base font-extrabold text-red-700 font-mono">$45,000</div>
+                  <div class="text-[10px] text-slate-500">1.4% · 3 Invoices</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- High Risk Table -->
+            <div class="space-y-2">
+              <span class="text-xs font-bold text-red-700 uppercase tracking-wider flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                High Risk Invoices (Random Forest Default Probability &ge; 50%)
+              </span>
+              <div class="overflow-x-auto border border-slate-200 rounded-xl">
+                <table class="w-full text-xs text-left">
+                  <thead class="bg-slate-100 text-slate-700 font-semibold border-b">
+                    <tr>
+                      <th class="p-2.5">Invoice #</th>
+                      <th class="p-2.5">Customer Name</th>
+                      <th class="p-2.5">Amount</th>
+                      <th class="p-2.5">Days Overdue</th>
+                      <th class="p-2.5 text-right">Default Risk Score</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-100">
+                    <tr class="hover:bg-amber-50/40">
+                      <td class="p-2.5 font-bold font-mono text-slate-800">INV-2024-9182</td>
+                      <td class="p-2.5">Apex Logistics Gulf Ltd</td>
+                      <td class="p-2.5 font-bold font-mono text-slate-900">$128,400.00</td>
+                      <td class="p-2.5 font-semibold text-rose-600">+74 days</td>
+                      <td class="p-2.5 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 text-red-800">88% Risk</span></td>
+                    </tr>
+                    <tr class="hover:bg-amber-50/40">
+                      <td class="p-2.5 font-bold font-mono text-slate-800">INV-2024-9044</td>
+                      <td class="p-2.5">Nile River Retail Group</td>
+                      <td class="p-2.5 font-bold font-mono text-slate-900">$64,200.00</td>
+                      <td class="p-2.5 font-semibold text-rose-600">+45 days</td>
+                      <td class="p-2.5 text-right"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 text-red-800">62% Risk</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2.3 PREDICTIVE COLLECTIONS CARD -->
+          <div id="card-collections" class="cash-card hidden bg-white border border-indigo-200/80 rounded-2xl p-6 shadow-md space-y-6 relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-indigo-700 via-purple-600 to-indigo-800"></div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h3 class="font-bold text-lg text-slate-900">Predictive Collections &amp; Automated Dunning Engine</h3>
+                <p class="text-xs text-slate-500 mt-0.5">ML Delay Prediction + Gemini Dunning Outreach Strategy</p>
+              </div>
+              <span class="bg-indigo-50 text-indigo-800 border border-indigo-300 text-xs px-3 py-1 font-semibold rounded-full">
+                Avg Predicted Delay: +14.2 days
+              </span>
+            </div>
+
+            <!-- 3 Metrics -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">Total Collection Target</span>
+                <span class="text-2xl font-extrabold text-slate-900 font-mono">$2,450,000</span>
+              </div>
+              <div class="bg-indigo-50/80 border border-indigo-200 p-4 rounded-xl">
+                <span class="text-[10px] font-semibold text-indigo-700 uppercase tracking-wider block mb-1">On-Time Payment Rate</span>
+                <span class="text-2xl font-extrabold text-indigo-800 font-mono">74.2%</span>
+              </div>
+              <div class="bg-purple-50/80 border border-purple-200 p-4 rounded-xl">
+                <span class="text-[10px] font-semibold text-purple-700 uppercase tracking-wider block mb-1">Collection Effectiveness</span>
+                <span class="text-2xl font-extrabold text-purple-800 font-mono">86.5%</span>
+              </div>
+            </div>
+
+            <!-- Dunning Queue -->
+            <div class="space-y-3">
+              <span class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                Automated Dunning Outreach Queue
+              </span>
+
+              <div class="space-y-3">
+                <!-- Item 1 -->
+                <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/60 hover:bg-white transition-colors space-y-2">
+                  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-2">
+                    <div class="flex items-center gap-2">
+                      <span class="font-extrabold text-slate-900 text-sm">Apex Logistics Gulf Ltd</span>
+                      <span class="bg-slate-100 text-slate-700 border border-slate-300 text-[10px] px-2 py-0.5 rounded font-mono">INV-9182</span>
+                      <span class="bg-indigo-100 text-indigo-800 text-[10px] px-2 py-0.5 rounded font-semibold">Late Payer Persona</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <span class="text-sm font-extrabold text-slate-900 font-mono">$128,400.00</span>
+                      <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-red-100 text-red-800 border border-red-200">Critical Priority</span>
+                    </div>
+                  </div>
+                  <div class="text-xs text-slate-600 leading-snug">
+                    <span class="font-semibold text-slate-800">AI Gemini Dunning Draft: </span>
+                    <span class="italic">"Dear Finance Director, your account shows invoice #INV-9182 ($128,400) is now 74 days overdue. To avoid service disruption and commercial interest charges under SLA section 14.2, please remit payment or confirm your wire reference by Thursday."</span>
+                  </div>
+                  <div class="flex justify-end pt-1">
+                    <button onclick="copyDunningDraft('Apex Logistics')" class="text-[11px] text-indigo-700 hover:text-indigo-900 font-bold flex items-center gap-1 bg-indigo-50 px-3 py-1 rounded-lg border border-indigo-200 cursor-pointer">
+                      <span>Copy Email Draft</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/60 hover:bg-white transition-colors space-y-2">
+                  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-2">
+                    <div class="flex items-center gap-2">
+                      <span class="font-extrabold text-slate-900 text-sm">Horizon Financial Corp</span>
+                      <span class="bg-slate-100 text-slate-700 border border-slate-300 text-[10px] px-2 py-0.5 rounded font-mono">INV-9099</span>
+                      <span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded font-semibold">Responsive Tier 1</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <span class="text-sm font-extrabold text-slate-900 font-mono">$54,000.00</span>
+                      <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-200">Standard Priority</span>
+                    </div>
+                  </div>
+                  <div class="text-xs text-slate-600 leading-snug">
+                    <span class="font-semibold text-slate-800">AI Gemini Dunning Draft: </span>
+                    <span class="italic">"Good day Accounts Payable, friendly courtesy reminder regarding invoice #INV-9099 ($54,000) maturing in 5 business days. Please advise if any supplemental billing documentation is required."</span>
+                  </div>
+                  <div class="flex justify-end pt-1">
+                    <button onclick="copyDunningDraft('Horizon Financial')" class="text-[11px] text-indigo-700 hover:text-indigo-900 font-bold flex items-center gap-1 bg-indigo-50 px-3 py-1 rounded-lg border border-indigo-200 cursor-pointer">
+                      <span>Copy Email Draft</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2.4 WORKING CAPITAL & CCC CARD -->
+          <div id="card-working-capital" class="cash-card hidden bg-white border border-emerald-200/80 rounded-2xl p-6 shadow-md space-y-6 relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-700"></div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h3 class="font-bold text-lg text-slate-900">Working Capital &amp; Cash Conversion Cycle (CCC)</h3>
+                <p class="text-xs text-slate-500 mt-0.5">DSO vs DPO ElasticNet Capital Optimization</p>
+              </div>
+              <span class="bg-emerald-50 text-emerald-800 border border-emerald-300 text-xs px-3 py-1 font-semibold rounded-full">
+                CCC: 25.7 Days
+              </span>
+            </div>
+
+            <!-- 4 CCC Metrics -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-center">
+                <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">DSO (Receivables)</span>
+                <span class="text-lg font-extrabold text-slate-900 font-mono">42.5 Days</span>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-center">
+                <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">DIO (Inventory/WIP)</span>
+                <span class="text-lg font-extrabold text-slate-900 font-mono">18.2 Days</span>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-center">
+                <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">DPO (Payables)</span>
+                <span class="text-lg font-extrabold text-slate-900 font-mono">35.0 Days</span>
+              </div>
+              <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-xl text-center">
+                <span class="text-[10px] font-semibold text-emerald-700 uppercase tracking-wider block mb-1">Working Capital Ratio</span>
+                <span class="text-lg font-extrabold text-emerald-800 font-mono">1.85x</span>
+              </div>
+            </div>
+
+            <!-- CFO Advice -->
+            <div class="text-xs text-slate-700 bg-slate-50 border border-slate-200 rounded-xl p-4 leading-relaxed">
+              <span class="font-bold text-slate-900">CFO Advice: </span>
+              <span>Current Cash Conversion Cycle is 25.7 days (CCC = DSO 42.5 + DIO 18.2 - DPO 35.0). Extending supplier payment terms on Tier 2 vendors from Net 30 to Net 45 will unlock $450,000 in free cash flow without impacting operational relationships.</span>
+            </div>
+
+            <!-- Modeled Scenarios -->
+            <div class="space-y-2">
+              <span class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Modeled Free Cash Flow Optimization Scenarios
+              </span>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1.5 shadow-xs">
+                  <div class="font-bold text-slate-800 text-xs">Extend DPO to 45 Days</div>
+                  <div class="text-xs text-slate-500">Projected CCC: <span class="font-semibold text-slate-900 font-mono">15.7 days</span></div>
+                  <div class="text-sm font-extrabold text-emerald-700 border-t border-slate-200 pt-1 mt-1 flex items-center justify-between font-mono">
+                    <span>Unlocked Cash:</span>
+                    <span>+$450,000</span>
+                  </div>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1.5 shadow-xs">
+                  <div class="font-bold text-slate-800 text-xs">Compress DSO by 5 Days</div>
+                  <div class="text-xs text-slate-500">Projected CCC: <span class="font-semibold text-slate-900 font-mono">20.7 days</span></div>
+                  <div class="text-sm font-extrabold text-emerald-700 border-t border-slate-200 pt-1 mt-1 flex items-center justify-between font-mono">
+                    <span>Unlocked Cash:</span>
+                    <span>+$280,000</span>
+                  </div>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1.5 shadow-xs">
+                  <div class="font-bold text-slate-800 text-xs">Dual Optimization (DSO+DPO)</div>
+                  <div class="text-xs text-slate-500">Projected CCC: <span class="font-semibold text-slate-900 font-mono">10.7 days</span></div>
+                  <div class="text-sm font-extrabold text-emerald-700 border-t border-slate-200 pt-1 mt-1 flex items-center justify-between font-mono">
+                    <span>Unlocked Cash:</span>
+                    <span>+$730,000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2.5 LIQUIDITY RISK & STRESS TESTING CARD -->
+          <div id="card-liquidity-risk" class="cash-card hidden bg-white border border-purple-200/80 rounded-2xl p-6 shadow-md space-y-6 relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-700 via-pink-600 to-purple-800"></div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h3 class="font-bold text-lg text-slate-900">Liquidity Risk &amp; Monte Carlo Stress Testing</h3>
+                <p class="text-xs text-slate-500 mt-0.5">Cash Runway &amp; 1,000 Iteration Scenario Simulation</p>
+              </div>
+              <span class="bg-purple-50 text-purple-800 border border-purple-300 text-xs px-3 py-1 font-semibold rounded-full font-mono">
+                Runway: 12.8 Months
+              </span>
+            </div>
+
+            <!-- 4 Stress KPIs -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">Current Cash</span>
+                <span class="text-xl font-extrabold text-slate-900 font-mono">$4,850,000</span>
+              </div>
+              <div class="bg-purple-50/80 border border-purple-200 p-4 rounded-xl">
+                <span class="text-[10px] font-semibold text-purple-700 uppercase tracking-wider block mb-1">Monthly Net Burn</span>
+                <span class="text-xl font-extrabold text-purple-900 font-mono">$380,000/mo</span>
+              </div>
+              <div class="bg-rose-50/80 border border-rose-200 p-4 rounded-xl">
+                <span class="text-[10px] font-semibold text-rose-700 uppercase tracking-wider block mb-1">90d Value at Risk (VaR 95%)</span>
+                <span class="text-xl font-extrabold text-rose-800 font-mono">$640,000</span>
+              </div>
+              <div class="bg-amber-50/80 border border-amber-200 p-4 rounded-xl">
+                <span class="text-[10px] font-semibold text-amber-800 uppercase tracking-wider block mb-1">Reserve Breach Prob.</span>
+                <span class="text-xl font-extrabold text-amber-900 font-mono">8.4%</span>
+              </div>
+            </div>
+
+            <!-- Stress Simulation Scenarios -->
+            <div class="space-y-2">
+              <span class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Monte Carlo Stress Test Scenarios (1,000 Iterations)
+              </span>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1.5">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-slate-800 text-xs">Mild Client Delay (DSO +15d)</span>
+                    <span class="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Low Risk</span>
+                  </div>
+                  <div class="text-xs text-slate-500">Projected 90d Cash: <span class="font-bold text-slate-900 font-mono">$4,210,000</span></div>
+                  <div class="text-xs font-extrabold text-purple-800 border-t border-slate-200 pt-1 mt-1 font-mono">
+                    Cash Runway: 11.2 Months
+                  </div>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1.5">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-slate-800 text-xs">Revenue Drop (-20%)</span>
+                    <span class="text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded">Medium Risk</span>
+                  </div>
+                  <div class="text-xs text-slate-500">Projected 90d Cash: <span class="font-bold text-slate-900 font-mono">$3,450,000</span></div>
+                  <div class="text-xs font-extrabold text-purple-800 border-t border-slate-200 pt-1 mt-1 font-mono">
+                    Cash Runway: 9.1 Months
+                  </div>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1.5">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-slate-800 text-xs">Severe Shock (-35% Rev + Delay)</span>
+                    <span class="text-[10px] font-bold bg-red-100 text-red-800 px-2 py-0.5 rounded">High Risk</span>
+                  </div>
+                  <div class="text-xs text-slate-500">Projected 90d Cash: <span class="font-bold text-slate-900 font-mono">$2,180,000</span></div>
+                  <div class="text-xs font-extrabold text-purple-800 border-t border-slate-200 pt-1 mt-1 font-mono">
+                    Cash Runway: 5.7 Months
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── AGENT CONTAINER 3-6: IN-PLAN MODULES ─────────── -->
+        <div id="view-inplan-placeholder" class="agent-view hidden bg-white border border-purple-200/80 rounded-2xl p-12 text-center shadow-xs space-y-5">
+          <div class="max-w-md mx-auto space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-purple-100 text-[#7C017D] flex items-center justify-center mx-auto">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <h3 id="inplanAgentTitle" class="text-lg font-bold text-[#2b0830]">Financial Performance Agent</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              This agent module is scheduled for development in upcoming sprint releases. Active production ML models and LLM engines are currently live in the <button onclick="switchAgent('cost-spend')" class="font-bold text-[#7C017D] underline cursor-pointer">Cost &amp; Spend Intelligence Agent</button> and <button onclick="switchAgent('cashflow-workingcapital')" class="font-bold text-[#7C017D] underline cursor-pointer">Cash Flow &amp; Capital Agent</button> tabs.
+            </p>
+          </div>
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-slate-100 text-slate-700 text-xs font-semibold rounded-full border border-slate-200">
+            <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>Module In Plan · Q3 Release Roadmap</span>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ─── FLOATING AI ASSISTANT CHATBOT WIDGET ──────────────────── -->
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <!-- Chat Window Modal -->
+    <div id="chatModal" class="hidden w-[380px] sm:w-[420px] bg-white rounded-2xl border border-purple-200 shadow-2xl overflow-hidden mb-3 animate-fadeIn flex-col h-[520px]">
+      <!-- Header -->
+      <div class="px-4 py-3 bg-gradient-to-r from-[#1a1b3c] to-[#7c017d] text-white flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center font-bold">
+            <svg class="w-4 h-4 text-[#e759ea]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <div>
+            <div class="font-extrabold text-xs text-white">Ducont Financial Copilot</div>
+            <div class="text-[10px] text-purple-200 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="chatAgentContext">Cost &amp; Spend Intelligence</span>
+            </div>
+          </div>
+        </div>
+        <button onclick="toggleChat()" class="text-white/80 hover:text-white p-1 cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Message History Container -->
+      <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50/50 text-xs custom-scrollbar">
+        <div class="flex items-start gap-2">
+          <div class="w-6 h-6 rounded-lg bg-[#7C017D] text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">AI</div>
+          <div class="bg-white border border-slate-200 p-3 rounded-2xl rounded-tl-none shadow-2xs text-slate-800 leading-relaxed">
+            Hello! I am your Autonomous Financial Copilot. Ask me about cost forecasts, expense anomalies, cash conversion cycles, or optimization opportunities!
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Prompt Suggestions -->
+      <div class="px-3 py-1.5 bg-slate-100/80 border-t border-slate-200 flex items-center gap-1.5 overflow-x-auto custom-scrollbar">
+        <button onclick="askPrompt('What is our next month spend forecast?')" class="px-2 py-1 rounded-lg bg-white border border-slate-200 text-[10px] font-semibold text-[#7C017D] hover:bg-purple-50 whitespace-nowrap cursor-pointer">
+          📈 Next Month Forecast?
+        </button>
+        <button onclick="askPrompt('Show top expense anomalies')" class="px-2 py-1 rounded-lg bg-white border border-slate-200 text-[10px] font-semibold text-[#7C017D] hover:bg-purple-50 whitespace-nowrap cursor-pointer">
+          ⚠️ Anomaly Flags
+        </button>
+        <button onclick="askPrompt('How can we optimize our Cash Conversion Cycle?')" class="px-2 py-1 rounded-lg bg-white border border-slate-200 text-[10px] font-semibold text-[#7C017D] hover:bg-purple-50 whitespace-nowrap cursor-pointer">
+          💵 Cash Cycle Advice
+        </button>
+      </div>
+
+      <!-- Input Form -->
+      <form onsubmit="handleChatSubmit(event)" class="p-3 bg-white border-t border-slate-200 flex items-center gap-2">
+        <input type="text" id="chatInput" placeholder="Ask AI Financial Agent..." class="flex-1 px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-[#7C017D]" />
+        <button type="submit" class="p-2 bg-[#7C017D] hover:bg-[#640564] text-white rounded-xl cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- Floating Circular Trigger Button -->
+    <button onclick="toggleChat()" class="w-14 h-14 rounded-full bg-gradient-to-tr from-[#7c017d] via-[#950c97] to-[#e759ea] text-white shadow-brand-lg hover:scale-105 transition-all flex items-center justify-center cursor-pointer border-2 border-white relative group">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+      <span class="absolute -top-1 -right-1 w-4 h-4 bg-emerald-400 border-2 border-white rounded-full"></span>
+    </button>
+  </div>
+
+  <!-- ─── JAVASCRIPT LOGIC & INTERACTION ────────────────────────── -->
+  <script>
+    let currentAgent = 'cost-spend';
+    let currentCostSubTab = 'cost-management';
+    let currentCashSubTab = 'cash-flow';
+    let costChartInstance = null;
+    let cashChartInstance = null;
+
+    // Opportunity Data for Modal
+    const OPPORTUNITIES = [
+      {
+        title: "Duplicate SaaS & Cloud Licensing Consolidation",
+        category: "Immediate Feasibility · Software Assets",
+        savings: "$84,000.00 / year",
+        impact: "Reduces redundant software licenses across 3 departments",
+        description: "Audit scanned 420 active SSO logins and discovered 18 dormant accounts in Figma Enterprise, Jira Software, and Datadog APM with zero user activity over the past 90 days.",
+        vendors: "Figma Inc, Atlassian, Datadog Inc",
+        sla: "1 - 3 Business Days",
+        steps: [
+          "De-provision 18 dormant user licenses via Okta/Azure AD SSO directory.",
+          "Downgrade enterprise tier tiering commitment at upcoming renewal cycle.",
+          "Set up automated 45-day inactivity license reclamation policy."
+        ]
+      },
+      {
+        title: "AWS Reserved Instance & Savings Plans Restructuring",
+        category: "Near Term Feasibility · Cloud Infrastructure",
+        savings: "$195,000.00 / year",
+        impact: "Converts high-cost on-demand EC2 & RDS compute to 1-year commitments",
+        description: "Continuous baseline compute utilization has remained stable at 64 vCPUs over 6 consecutive months. 72% of this capacity is currently billed at expensive on-demand spot rates.",
+        vendors: "Amazon Web Services (AWS)",
+        sla: "5 - 7 Business Days",
+        steps: [
+          "Purchase 1-Year Compute Savings Plans for base prod workloads (38% discount).",
+          "Automate dev/staging cluster auto-shutdown outside UAE business hours (Save $32k).",
+          "Migrate legacy gp2 EBS storage volumes to gp3 for 20% IOPS price performance gain."
+        ]
+      },
+      {
+        title: "Off-Contract Staffing Vendor Consolidation",
+        category: "Strategic Feasibility · Vendor Management",
+        savings: "$142,000.00 / year",
+        impact: "Re-negotiates volume rate card across unified staffing provider",
+        description: "4 separate business units are contracting engineering contractor resources independently across 5 different staffing agencies with rate variance exceeding 32% for identical role titles.",
+        vendors: "Adecco, Michael Page, TechTalent Gulf",
+        sla: "14 - 21 Business Days",
+        steps: [
+          "Consolidate all contractor requisitions under single Master Service Agreement (MSA).",
+          "Enforce standardized rate cards based on seniority tiers ($45/hr - $85/hr).",
+          "Incorporate 5% volume rebate threshold once annual billing exceeds $1.5M."
+        ]
+      },
+      {
+        title: "Early Payment 2/10 Net 30 Commercial Rebates",
+        category: "Immediate Feasibility · Accounts Payable",
+        savings: "$64,000.00 / year",
+        impact: "Captures 2% cash discount on invoices paid within 10 days",
+        description: "Our current DSO is 42.5 days while cash balance sits at $4.85M. Top 10 tier-1 suppliers offer 2/10 Net 30 terms which Ducont has historically overlooked.",
+        vendors: "Dell Technologies, Oracle Systems, Cisco Meraki",
+        sla: "Immediate Activation",
+        steps: [
+          "Enable automated early payment settlement triggers in AP workflow.",
+          "Target top 10 hardware and telecom suppliers with prompt settlement.",
+          "Track captured cash discounts monthly on AP performance dashboard."
+        ]
+      }
+    ];
+
+    // Initialize Page on Load
+    window.addEventListener('DOMContentLoaded', () => {
+      initCostForecastChart();
+    });
+
+    // ─── AGENT SWITCHER ──────────────────────────────────────────
+    function switchAgent(agentId) {
+      currentAgent = agentId;
+      document.querySelectorAll('.agent-nav-btn').forEach(btn => {
+        btn.classList.remove('tab-active');
+        btn.classList.add('text-slate-600');
+      });
+
+      const activeBtn = document.getElementById(`agentBtn-${agentId}`);
+      if (activeBtn) {
+        activeBtn.classList.add('tab-active');
+        activeBtn.classList.remove('text-slate-600');
+      }
+
+      // Hide all views
+      document.getElementById('view-cost-spend').classList.add('hidden');
+      document.getElementById('view-cashflow-workingcapital').classList.add('hidden');
+      document.getElementById('view-inplan-placeholder').classList.add('hidden');
+
+      if (agentId === 'cost-spend') {
+        document.getElementById('view-cost-spend').classList.remove('hidden');
+        document.getElementById('chatAgentContext').textContent = "Cost & Spend Intelligence";
+        setTimeout(() => initCostForecastChart(), 50);
+      } else if (agentId === 'cashflow-workingcapital') {
+        document.getElementById('view-cashflow-workingcapital').classList.remove('hidden');
+        document.getElementById('chatAgentContext').textContent = "Cash Flow & Working Capital";
+        setTimeout(() => initCashFlowChart(), 50);
+      } else {
+        const inplanView = document.getElementById('view-inplan-placeholder');
+        inplanView.classList.remove('hidden');
+        const titles = {
+          'financial-performance': 'Financial Performance Agent',
+          'revenue-commercial': 'Revenue & Commercial Intelligence Agent',
+          'risk-compliance': 'Financial Risk & Compliance Agent',
+          'ops-transaction': 'Finance Operations & Transaction Agent'
+        };
+        document.getElementById('inplanAgentTitle').textContent = titles[agentId] || 'AI Agent';
+        document.getElementById('chatAgentContext').textContent = titles[agentId] || 'AI Financial Agent';
+      }
+    }
+
+    // ─── COST SUBTAB SWITCHER ────────────────────────────────────
+    function switchCostSubTab(subTabId) {
+      currentCostSubTab = subTabId;
+      document.querySelectorAll('.cost-subtab').forEach(b => {
+        b.classList.remove('subtab-active');
+        b.classList.add('bg-slate-50/80', 'text-slate-700');
+      });
+
+      const btn = document.getElementById(`subtab-${subTabId}`);
+      if (btn) {
+        btn.classList.add('subtab-active');
+        btn.classList.remove('bg-slate-50/80', 'text-slate-700');
+      }
+
+      document.querySelectorAll('.cost-card').forEach(c => c.classList.add('hidden'));
+      const activeCard = document.getElementById(`card-${subTabId}`);
+      if (activeCard) {
+        activeCard.classList.remove('hidden');
+      }
+
+      document.getElementById('costActiveLabel').textContent = subTabId.replace(/-/g, ' ');
+
+      if (subTabId === 'cost-management') {
+        setTimeout(() => initCostForecastChart(), 50);
+      }
+    }
+
+    // ─── CASH SUBTAB SWITCHER ────────────────────────────────────
+    function switchCashflowSubTab(subTabId) {
+      currentCashSubTab = subTabId;
+      document.querySelectorAll('.cash-subtab').forEach(b => {
+        b.classList.remove('subtab-active');
+        b.classList.add('bg-slate-50/80', 'text-slate-700');
+      });
+
+      const btn = document.getElementById(`subtab-${subTabId}`);
+      if (btn) {
+        btn.classList.add('subtab-active');
+        btn.classList.remove('bg-slate-50/80', 'text-slate-700');
+      }
+
+      document.querySelectorAll('.cash-card').forEach(c => c.classList.add('hidden'));
+      const activeCard = document.getElementById(`card-${subTabId}`);
+      if (activeCard) {
+        activeCard.classList.remove('hidden');
+      }
+
+      document.getElementById('cashActiveLabel').textContent = subTabId.replace(/-/g, ' ');
+
+      if (subTabId === 'cash-flow') {
+        setTimeout(() => initCashFlowChart(), 50);
+      }
+    }
+
+    // ─── CHART.JS: COST FORECAST CHART ───────────────────────────
+    function initCostForecastChart() {
+      const ctx = document.getElementById('costForecastChart');
+      if (!ctx) return;
+      if (costChartInstance) costChartInstance.destroy();
+
+      costChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Apr 2024', 'May 2024', 'Jun 2024', 'Jul 2024', 'Aug 2024', 'Sep 2024 (Actual)', 'Oct 2024 (ML)', 'Nov 2024 (ML)', 'Dec 2024 (ML)'],
+          datasets: [
+            {
+              label: 'Historical Actual Spend',
+              data: [1120000, 1150000, 1090000, 1180000, 1210000, 1240000, null, null, null],
+              borderColor: '#1e293b',
+              backgroundColor: '#1e293b',
+              borderWidth: 2.5,
+              tension: 0.3,
+              pointRadius: 4,
+            },
+            {
+              label: 'XGBoost Predicted Spend',
+              data: [null, null, null, null, null, 1240000, 1419300, 1485000, 1520000],
+              borderColor: '#7C017D',
+              backgroundColor: 'rgba(124, 1, 125, 0.1)',
+              borderWidth: 3,
+              borderDash: [6, 4],
+              tension: 0.3,
+              pointRadius: 5,
+              pointBackgroundColor: '#7C017D'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', labels: { font: { family: 'Plus Jakarta Sans', size: 11, weight: 'bold' } } },
+            tooltip: {
+              callbacks: {
+                label: (c) => ` ${c.dataset.label}: $${c.raw?.toLocaleString()}`
+              }
+            }
+          },
+          scales: {
+            y: {
+              ticks: {
+                callback: (v) => `$${(v/1000).toFixed(0)}k`,
+                font: { family: 'JetBrains Mono', size: 10 }
+              },
+              grid: { color: '#f1f5f9' }
+            },
+            x: {
+              ticks: { font: { family: 'Plus Jakarta Sans', size: 10 } },
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    // ─── CHART.JS: CASH FLOW TIMELINE ────────────────────────────
+    function initCashFlowChart() {
+      const ctx = document.getElementById('cashFlowChart');
+      if (!ctx) return;
+      if (cashChartInstance) cashChartInstance.destroy();
+
+      cashChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['W11', 'W12', 'W13', 'W14', 'W15', 'W16', 'W17', 'W18', 'W19', 'W20', 'W21', 'W22', 'W23'],
+          datasets: [
+            {
+              label: 'Projected Inflows',
+              data: [280, 310, 240, 290, 350, 220, 270, 310, 260, 290, 330, 250, 280],
+              backgroundColor: '#10b981',
+              borderRadius: 4
+            },
+            {
+              label: 'Projected Outflows',
+              data: [210, 250, 190, 240, 280, 200, 230, 260, 210, 230, 270, 220, 240],
+              backgroundColor: '#f43f5e',
+              borderRadius: 4
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', labels: { font: { family: 'Plus Jakarta Sans', size: 11, weight: 'bold' } } },
+            tooltip: {
+              callbacks: {
+                label: (c) => ` ${c.dataset.label}: $${c.raw}k`
+              }
+            }
+          },
+          scales: {
+            y: {
+              ticks: {
+                callback: (v) => `$${v}k`,
+                font: { family: 'JetBrains Mono', size: 10 }
+              },
+              grid: { color: '#f1f5f9' }
+            },
+            x: {
+              ticks: { font: { family: 'Plus Jakarta Sans', size: 10 } },
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    // ─── TOAST NOTIFICATIONS ─────────────────────────────────────
+    function toast(message) {
+      const container = document.getElementById('toastContainer');
+      const toastEl = document.createElement('div');
+      toastEl.className = "bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-xl border border-slate-700 flex items-center gap-2 animate-fadeIn pointer-events-auto";
+      toastEl.innerHTML = `
+        <svg class="w-4 h-4 text-[#e759ea]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span>${message}</span>
+      `;
+      container.appendChild(toastEl);
+      setTimeout(() => {
+        toastEl.style.opacity = '0';
+        toastEl.style.transition = 'opacity 0.3s';
+        setTimeout(() => toastEl.remove(), 300);
+      }, 3000);
+    }
+
+    // ─── FILTER CHANGE HANDLERS ──────────────────────────────────
+    function handleGlobalFilterChange() {
+      const reg = document.getElementById('globalRegionSelect').value;
+      const yr = document.getElementById('globalYearSelect').value;
+      document.getElementById('cmRegionLabel').textContent = reg === 'all' ? 'Global' : reg;
+      toast(`Filter switched: Region ${reg.toUpperCase()} · FY ${yr}`);
+    }
+
+    function triggerGlobalRefresh() {
+      const icon = document.getElementById('topRefreshIcon');
+      icon.classList.add('animate-spin');
+      setTimeout(() => {
+        icon.classList.remove('animate-spin');
+        toast("Autonomous AI Engine recalibrated across all 6 agents.");
+      }, 700);
+    }
+
+    function refreshCostCard() {
+      toast("XGBoost Regression model recalibrated with latest ERP actuals.");
+    }
+
+    // ─── MODAL CONTROLS ──────────────────────────────────────────
+    function openModal(idx) {
+      const opp = OPPORTUNITIES[idx];
+      if (!opp) return;
+
+      document.getElementById('modalTitle').textContent = opp.title;
+      document.getElementById('modalCategory').textContent = opp.category;
+      document.getElementById('modalSavings').textContent = opp.savings;
+      document.getElementById('modalImpact').textContent = opp.impact;
+      document.getElementById('modalDescription').textContent = opp.description;
+      document.getElementById('modalVendors').textContent = opp.vendors;
+      document.getElementById('modalSla').textContent = opp.sla;
+
+      const stepsList = document.getElementById('modalSteps');
+      stepsList.innerHTML = '';
+      opp.steps.forEach((st, i) => {
+        const li = document.createElement('li');
+        li.className = "flex items-start gap-2 text-xs";
+        li.innerHTML = `<span class="w-4 h-4 rounded-full bg-purple-100 text-[#7C017D] flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">${i+1}</span> <span>${st}</span>`;
+        stepsList.appendChild(li);
+      });
+
+      const modal = document.getElementById('oppModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('oppModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function applyOpportunityAction() {
+      closeModal();
+      toast("Action workflow initiated in ERP & procurement queue.");
+    }
+
+    // ─── ANOMALY RESOLVER ────────────────────────────────────────
+    function dismissAnomaly(rowId, refId) {
+      const row = document.getElementById(rowId);
+      if (row) {
+        row.remove();
+        toast(`Anomaly ${refId} resolved and logged to audit trail.`);
+      }
+    }
+
+    function filterAnomalies(type) {
+      toast(`Filtered anomaly queue: ${type}`);
+    }
+
+    // ─── DUNNING DRAFT COPY ──────────────────────────────────────
+    function copyDunningDraft(client) {
+      toast(`Copied AI Dunning draft for ${client} to clipboard!`);
+    }
+
+    // ─── REFORECAST SIMULATION ───────────────────────────────────
+    function simulateReforecast() {
+      const inf = document.getElementById('simInflow').value;
+      const out = document.getElementById('simOutflow').value;
+      toast(`Rerolled 13-Week forecast: Actuals In $${Number(inf).toLocaleString()} / Out $${Number(out).toLocaleString()}. Retraining not required.`);
+    }
+
+    // ─── CHATBOT COPILOT ─────────────────────────────────────────
+    function toggleChat() {
+      const modal = document.getElementById('chatModal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+
+    function askPrompt(q) {
+      document.getElementById('chatInput').value = q;
+      handleChatSubmit(new Event('submit'));
+    }
+
+    function handleChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('chatInput');
+      const query = input.value.trim();
+      if (!query) return;
+
+      const container = document.getElementById('chatMessages');
+
+      // Add user message
+      const userEl = document.createElement('div');
+      userEl.className = "flex items-start justify-end gap-2";
+      userEl.innerHTML = `
+        <div class="bg-[#7C017D] text-white p-3 rounded-2xl rounded-tr-none shadow-2xs text-xs leading-relaxed max-w-[85%]">
+          ${query}
+        </div>
+      `;
+      container.appendChild(userEl);
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      // Simulated AI Thinking & Response
+      setTimeout(() => {
+        let answer = "";
+        const qLower = query.toLowerCase();
+        if (qLower.includes('forecast') || qLower.includes('spend') || qLower.includes('next month')) {
+          answer = "Next month spend is forecasted at $1,419,304.00 (+14.46% MoM). Key driver is contractor advisory renewals ($640k / 51.6%) and AWS cloud infrastructure scaling ($320k / 25.8%).";
+        } else if (qLower.includes('anomaly') || qLower.includes('unusual') || qLower.includes('flag')) {
+          answer = "Isolation Forest detected 6 anomalous transactions totaling $84,500 at risk. Top flag is EXP-9041: duplicate invoice from TechCorp Solutions for $24,500.";
+        } else if (qLower.includes('cash') || qLower.includes('ccc') || qLower.includes('working capital')) {
+          answer = "Our current Cash Conversion Cycle is 25.7 days (DSO 42.5 + DIO 18.2 - DPO 35.0). Extending Tier-2 supplier terms to Net 45 will unlock $450,000 in immediate free liquidity.";
+        } else {
+          answer = `Ducont Financial AI analysis: Current month spend baseline is $1.24M with 96.4% forecasting precision. Free cash reserves stand at $4.85M (12.8 months runway).`;
+        }
+
+        const aiEl = document.createElement('div');
+        aiEl.className = "flex items-start gap-2";
+        aiEl.innerHTML = `
+          <div class="w-6 h-6 rounded-lg bg-[#7C017D] text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">AI</div>
+          <div class="bg-white border border-slate-200 p-3 rounded-2xl rounded-tl-none shadow-2xs text-slate-800 leading-relaxed max-w-[85%]">
+            ${answer}
+          </div>
+        `;
+        container.appendChild(aiEl);
+        container.scrollTop = container.scrollHeight;
+      }, 500);
+    }
+  </script>
+</body>
+</html>
