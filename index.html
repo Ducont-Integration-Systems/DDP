@@ -197,8 +197,13 @@
 
         <!-- Navigation Menu -->
         <nav class="space-y-1 text-xs font-semibold">
+          <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-purple-100/70 hover:bg-white/10 hover:text-white transition-colors">
+            <svg class="w-4 h-4 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+            <span>Dashboard</span>
+          </a>
+
           <!-- ACTIVE AI REPORTS ITEM -->
-          <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded-xl bg-white/20 text-white font-bold border border-white/20 shadow-md">
+          <a href="index.html" class="flex items-center justify-between px-3 py-2.5 rounded-xl bg-white/20 text-white font-bold border border-white/20 shadow-md">
             <div class="flex items-center gap-3">
               <svg class="w-4 h-4 text-[#e759ea]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
               <span>AI Reports Hub</span>
@@ -301,32 +306,32 @@
               <span>Cash Flow &amp; Capital</span>
             </button>
 
-            <!-- Tab 3: Financial Performance (In Plan) -->
-            <button onclick="switchAgent('financial-performance')" id="agentBtn-financial-performance" class="agent-nav-btn text-slate-600 hover:text-[#7C017D] hover:bg-purple-50/70 border border-transparent flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold transition-all whitespace-nowrap cursor-pointer">
-              <svg class="w-4 h-4 shrink-0 text-[#7C017D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+            <!-- Tab 3: Financial Performance (In Plan - Disabled) -->
+            <button disabled class="flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold text-slate-400 border border-transparent whitespace-nowrap cursor-not-allowed opacity-60 select-none" title="In Plan - Not clickable">
+              <svg class="w-4 h-4 shrink-0 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
               <span>Financial Performance</span>
-              <span class="px-2 py-0.5 text-[10px] rounded-full font-bold bg-slate-100 text-slate-600 border border-slate-200">In Plan</span>
+              <span class="px-2 py-0.5 text-[10px] rounded-full font-medium bg-slate-100 text-slate-400 border border-slate-200">In Plan</span>
             </button>
 
-            <!-- Tab 4: Revenue & Commercial (In Plan) -->
-            <button onclick="switchAgent('revenue-commercial')" id="agentBtn-revenue-commercial" class="agent-nav-btn text-slate-600 hover:text-[#7C017D] hover:bg-purple-50/70 border border-transparent flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold transition-all whitespace-nowrap cursor-pointer">
-              <svg class="w-4 h-4 shrink-0 text-[#7C017D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+            <!-- Tab 4: Revenue & Commercial (In Plan - Disabled) -->
+            <button disabled class="flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold text-slate-400 border border-transparent whitespace-nowrap cursor-not-allowed opacity-60 select-none" title="In Plan - Not clickable">
+              <svg class="w-4 h-4 shrink-0 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
               <span>Revenue &amp; Commercial</span>
-              <span class="px-2 py-0.5 text-[10px] rounded-full font-bold bg-slate-100 text-slate-600 border border-slate-200">In Plan</span>
+              <span class="px-2 py-0.5 text-[10px] rounded-full font-medium bg-slate-100 text-slate-400 border border-slate-200">In Plan</span>
             </button>
 
-            <!-- Tab 5: Risk & Compliance (In Plan) -->
-            <button onclick="switchAgent('risk-compliance')" id="agentBtn-risk-compliance" class="agent-nav-btn text-slate-600 hover:text-[#7C017D] hover:bg-purple-50/70 border border-transparent flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold transition-all whitespace-nowrap cursor-pointer">
-              <svg class="w-4 h-4 shrink-0 text-[#7C017D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <!-- Tab 5: Risk & Compliance (In Plan - Disabled) -->
+            <button disabled class="flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold text-slate-400 border border-transparent whitespace-nowrap cursor-not-allowed opacity-60 select-none" title="In Plan - Not clickable">
+              <svg class="w-4 h-4 shrink-0 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
               <span>Risk &amp; Compliance</span>
-              <span class="px-2 py-0.5 text-[10px] rounded-full font-bold bg-slate-100 text-slate-600 border border-slate-200">In Plan</span>
+              <span class="px-2 py-0.5 text-[10px] rounded-full font-medium bg-slate-100 text-slate-400 border border-slate-200">In Plan</span>
             </button>
 
-            <!-- Tab 6: Finance Operations (In Plan) -->
-            <button onclick="switchAgent('ops-transaction')" id="agentBtn-ops-transaction" class="agent-nav-btn text-slate-600 hover:text-[#7C017D] hover:bg-purple-50/70 border border-transparent flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold transition-all whitespace-nowrap cursor-pointer">
-              <svg class="w-4 h-4 shrink-0 text-[#7C017D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+            <!-- Tab 6: Finance Operations (In Plan - Disabled) -->
+            <button disabled class="flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold text-slate-400 border border-transparent whitespace-nowrap cursor-not-allowed opacity-60 select-none" title="In Plan - Not clickable">
+              <svg class="w-4 h-4 shrink-0 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
               <span>Finance Operations</span>
-              <span class="px-2 py-0.5 text-[10px] rounded-full font-bold bg-slate-100 text-slate-600 border border-slate-200">In Plan</span>
+              <span class="px-2 py-0.5 text-[10px] rounded-full font-medium bg-slate-100 text-slate-400 border border-slate-200">In Plan</span>
             </button>
           </div>
         </div>
