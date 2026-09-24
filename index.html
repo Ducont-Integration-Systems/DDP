@@ -1555,7 +1555,23 @@
 
     // Initialize Page on Load
     window.addEventListener('DOMContentLoaded', () => {
-      initCostForecastChart();
+      const urlParams = new URLSearchParams(window.location.search);
+      const agentParam = urlParams.get('agent');
+      const subtabParam = urlParams.get('subtab');
+
+      if (agentParam) {
+        switchAgent(agentParam);
+      } else {
+        initCostForecastChart();
+      }
+
+      if (subtabParam) {
+        if (agentParam === 'cashflow-workingcapital') {
+          switchCashflowSubTab(subtabParam);
+        } else {
+          switchCostSubTab(subtabParam);
+        }
+      }
     });
 
     // ─── AGENT SWITCHER ──────────────────────────────────────────

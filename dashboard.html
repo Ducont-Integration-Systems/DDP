@@ -267,7 +267,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           
           <!-- Card 1: TOTAL REVENUE -->
-          <div class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs relative overflow-hidden border-t-4 border-t-[#3b124d]">
+          <a href="index.html?agent=cost-spend&subtab=cost-management" class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs relative overflow-hidden border-t-4 border-t-[#3b124d] block cursor-pointer" title="View in AI Reports Hub">
             <div class="flex items-center justify-between">
               <div class="w-8 h-8 rounded-lg bg-purple-50 text-[#3b124d] flex items-center justify-center">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
@@ -279,10 +279,10 @@
               <div class="text-3xl font-extrabold text-slate-900 mt-1">$4.6M</div>
               <div class="text-xs text-slate-400 font-medium mt-1">FY 2026-27</div>
             </div>
-          </div>
+          </a>
 
           <!-- Card 2: TOTAL EXPENSES -->
-          <div class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs relative overflow-hidden border-t-4 border-t-[#ff4d4f]">
+          <a href="index.html?agent=cost-spend&subtab=spend-analysis" class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs relative overflow-hidden border-t-4 border-t-[#ff4d4f] block cursor-pointer" title="View in AI Reports Hub">
             <div class="flex items-center justify-between">
               <div class="w-8 h-8 rounded-lg bg-rose-50 text-[#ff4d4f] flex items-center justify-center font-bold text-sm">
                 $
@@ -293,10 +293,10 @@
               <div class="text-3xl font-extrabold text-slate-900 mt-1">$1.4M</div>
               <div class="text-xs text-slate-400 font-medium mt-1">Cost of operations</div>
             </div>
-          </div>
+          </a>
 
           <!-- Card 3: GROSS PROFIT -->
-          <div class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs relative overflow-hidden border-t-4 border-t-[#00b96b]">
+          <a href="index.html?agent=cost-spend&subtab=cost-optimization" class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs relative overflow-hidden border-t-4 border-t-[#00b96b] block cursor-pointer" title="View in AI Reports Hub">
             <div class="flex items-center justify-between">
               <div class="w-8 h-8 rounded-lg bg-emerald-50 text-[#00b96b] flex items-center justify-center">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"></circle><circle cx="12" cy="12" r="5" stroke-width="2"></circle><circle cx="12" cy="12" r="1" stroke-width="2"></circle></svg>
@@ -308,10 +308,10 @@
               <div class="text-3xl font-extrabold text-slate-900 mt-1">$3.2M</div>
               <div class="text-xs text-slate-400 font-medium mt-1">69% GP margin</div>
             </div>
-          </div>
+          </a>
 
           <!-- Card 4: NET MARGIN -->
-          <div class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs relative overflow-hidden border-t-4 border-t-[#13c2c2]">
+          <a href="index.html?agent=cashflow-workingcapital&subtab=cash-flow" class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs relative overflow-hidden border-t-4 border-t-[#13c2c2] block cursor-pointer" title="View in AI Reports Hub">
             <div class="flex items-center justify-between">
               <div class="w-8 h-8 rounded-lg bg-teal-50 text-[#13c2c2] flex items-center justify-center">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
@@ -323,7 +323,7 @@
               <div class="text-3xl font-extrabold text-slate-900 mt-1">$3.2M</div>
               <div class="text-xs text-slate-400 font-medium mt-1">+69% of revenue</div>
             </div>
-          </div>
+          </a>
 
         </div>
 
@@ -341,9 +341,9 @@
                   </div>
                   <h3 class="text-base font-bold text-slate-900">Cost Optimization</h3>
                 </div>
-                <button onclick="openDrillModal('cost-optimization')" class="w-7 h-7 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-600 flex items-center justify-center transition-colors cursor-pointer">
+                <a href="index.html?agent=cost-spend&subtab=cost-optimization" class="w-7 h-7 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-600 flex items-center justify-center transition-colors cursor-pointer" title="Open Cost Optimization in AI Reports">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </button>
+                </a>
               </div>
 
               <!-- Main Content Area -->
@@ -379,20 +379,22 @@
               </div>
 
               <!-- Insight Banner -->
-              <div onclick="openDrillModal('cost-optimization')" class="mt-4 p-2.5 bg-emerald-50/70 hover:bg-emerald-50 border border-emerald-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors">
-                <div class="flex items-center gap-2">
-                  <span class="text-emerald-600 font-bold">💡</span>
-                  <span>We identified <strong class="text-emerald-800 font-bold">$383.7K</strong> in potential annual savings across 4 oppor...</span>
+              <a href="index.html?agent=cost-spend&subtab=cost-optimization" class="mt-4 p-2.5 bg-emerald-50/70 hover:bg-emerald-100/70 border border-emerald-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors block" title="Open Cost Optimization in AI Reports">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="text-emerald-600 font-bold">💡</span>
+                    <span>We identified <strong class="text-emerald-800 font-bold">$383.7K</strong> in potential annual savings across 4 oppor...</span>
+                  </div>
+                  <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </div>
-                <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-              </div>
+              </a>
             </div>
 
             <!-- Full Width Action Button -->
-            <button onclick="openDrillModal('cost-optimization')" class="w-full py-2.5 bg-[#00875a] hover:bg-[#00744e] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+            <a href="index.html?agent=cost-spend&subtab=cost-optimization" class="w-full py-2.5 bg-[#00875a] hover:bg-[#00744e] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
               <span>View Cost Optimization Insights</span>
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </button>
+            </a>
           </div>
 
           <!-- Card 2: Spend Analysis (Active elevated card) -->
@@ -406,9 +408,9 @@
                   </div>
                   <h3 class="text-base font-bold text-slate-900">Spend Analysis</h3>
                 </div>
-                <button onclick="openDrillModal('spend-analysis')" class="w-7 h-7 rounded-full bg-indigo-50 hover:bg-indigo-100 text-indigo-600 flex items-center justify-center transition-colors cursor-pointer">
+                <a href="index.html?agent=cost-spend&subtab=spend-analysis" class="w-7 h-7 rounded-full bg-indigo-50 hover:bg-indigo-100 text-indigo-600 flex items-center justify-center transition-colors cursor-pointer" title="Open Spend Analysis in AI Reports">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </button>
+                </a>
               </div>
 
               <!-- Main Content Area -->
@@ -447,20 +449,22 @@
               </div>
 
               <!-- Insight Banner -->
-              <div onclick="openDrillModal('spend-analysis')" class="mt-4 p-2.5 bg-indigo-50/70 hover:bg-indigo-50 border border-indigo-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors">
-                <div class="flex items-center gap-2">
-                  <span class="text-indigo-600 font-bold">⚠️</span>
-                  <span>Top 2 units account for <strong class="text-indigo-900 font-bold">69.4%</strong> of total spend. Consider diversifying.</span>
+              <a href="index.html?agent=cost-spend&subtab=spend-analysis" class="mt-4 p-2.5 bg-indigo-50/70 hover:bg-indigo-100/70 border border-indigo-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors block" title="Open Spend Analysis in AI Reports">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="text-indigo-600 font-bold">⚠️</span>
+                    <span>Top 2 units account for <strong class="text-indigo-900 font-bold">69.4%</strong> of total spend. Consider diversifying.</span>
+                  </div>
+                  <svg class="w-3.5 h-3.5 text-indigo-600 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </div>
-                <svg class="w-3.5 h-3.5 text-indigo-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-              </div>
+              </a>
             </div>
 
             <!-- Full Width Action Button -->
-            <button onclick="openDrillModal('spend-analysis')" class="w-full py-2.5 bg-[#4338ca] hover:bg-[#3730a3] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+            <a href="index.html?agent=cost-spend&subtab=spend-analysis" class="w-full py-2.5 bg-[#4338ca] hover:bg-[#3730a3] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
               <span>View Spend Analysis Insights</span>
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </button>
+            </a>
           </div>
 
           <!-- Card 3: Expense Monitoring -->
@@ -474,9 +478,9 @@
                   </div>
                   <h3 class="text-base font-bold text-slate-900">Expense Monitoring</h3>
                 </div>
-                <button onclick="openDrillModal('expense-monitoring')" class="w-7 h-7 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-600 flex items-center justify-center transition-colors cursor-pointer">
+                <a href="index.html?agent=cost-spend&subtab=expense-monitoring" class="w-7 h-7 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-600 flex items-center justify-center transition-colors cursor-pointer" title="Open Expense Monitoring in AI Reports">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </button>
+                </a>
               </div>
 
               <!-- Main Content Area -->
@@ -503,20 +507,22 @@
               </div>
 
               <!-- Insight Banner -->
-              <div onclick="openDrillModal('expense-monitoring')" class="mt-4 p-2.5 bg-amber-50/70 hover:bg-amber-50 border border-amber-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors">
-                <div class="flex items-center gap-2">
-                  <span class="text-amber-600 font-bold">✓</span>
-                  <span>1 high-value transaction requires review. Potential policy violation...</span>
+              <a href="index.html?agent=cost-spend&subtab=expense-monitoring" class="mt-4 p-2.5 bg-amber-50/70 hover:bg-amber-100/70 border border-amber-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors block" title="Open Expense Monitoring in AI Reports">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="text-amber-600 font-bold">✓</span>
+                    <span>1 high-value transaction requires review. Potential policy violation...</span>
+                  </div>
+                  <svg class="w-3.5 h-3.5 text-amber-600 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </div>
-                <svg class="w-3.5 h-3.5 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-              </div>
+              </a>
             </div>
 
             <!-- Full Width Action Button -->
-            <button onclick="openDrillModal('expense-monitoring')" class="w-full py-2.5 bg-[#c25e00] hover:bg-[#a64e00] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+            <a href="index.html?agent=cost-spend&subtab=expense-monitoring" class="w-full py-2.5 bg-[#c25e00] hover:bg-[#a64e00] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
               <span>View Expense Monitoring Insights</span>
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </button>
+            </a>
           </div>
 
         </div>
@@ -535,9 +541,9 @@
                   </div>
                   <h3 class="text-base font-bold text-slate-900">Budget Utilization</h3>
                 </div>
-                <button onclick="openDrillModal('budget-utilization')" class="w-7 h-7 rounded-full bg-purple-50 hover:bg-purple-100 text-[#7C017D] flex items-center justify-center transition-colors cursor-pointer">
+                <a href="index.html?agent=cost-spend&subtab=budget-utilization" class="w-7 h-7 rounded-full bg-purple-50 hover:bg-purple-100 text-[#7C017D] flex items-center justify-center transition-colors cursor-pointer" title="Open Budget Utilization in AI Reports">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </button>
+                </a>
               </div>
 
               <!-- Main Content Grid -->
@@ -571,20 +577,22 @@
               </div>
 
               <!-- Insight Banner -->
-              <div onclick="openDrillModal('budget-utilization')" class="mt-4 p-2.5 bg-purple-50/70 hover:bg-purple-50 border border-purple-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors">
-                <div class="flex items-center gap-2">
-                  <span class="text-[#7C017D] font-bold">⚠️</span>
-                  <span>You are at risk of exceeding budget in Q3 based on current spend trend.</span>
+              <a href="index.html?agent=cost-spend&subtab=budget-utilization" class="mt-4 p-2.5 bg-purple-50/70 hover:bg-purple-100/70 border border-purple-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors block" title="Open Budget Utilization in AI Reports">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="text-[#7C017D] font-bold">⚠️</span>
+                    <span>You are at risk of exceeding budget in Q3 based on current spend trend.</span>
+                  </div>
+                  <svg class="w-3.5 h-3.5 text-[#7C017D] shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </div>
-                <svg class="w-3.5 h-3.5 text-[#7C017D] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-              </div>
+              </a>
             </div>
 
             <!-- Full Width Action Button -->
-            <button onclick="openDrillModal('budget-utilization')" class="w-full py-2.5 bg-[#7C017D] hover:bg-[#640564] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+            <a href="index.html?agent=cost-spend&subtab=budget-utilization" class="w-full py-2.5 bg-[#7C017D] hover:bg-[#640564] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
               <span>View Budget Insights</span>
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </button>
+            </a>
           </div>
 
           <!-- Card 2: Revenue Forecasting -->
@@ -598,9 +606,9 @@
                   </div>
                   <h3 class="text-base font-bold text-slate-900">Revenue Forecasting</h3>
                 </div>
-                <button onclick="openDrillModal('revenue-forecasting')" class="w-7 h-7 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-600 flex items-center justify-center transition-colors cursor-pointer">
+                <a href="index.html?agent=cost-spend&subtab=cost-management" class="w-7 h-7 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-600 flex items-center justify-center transition-colors cursor-pointer" title="Open Forecast Details in AI Reports">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </button>
+                </a>
               </div>
 
               <!-- Main Content Grid -->
@@ -629,20 +637,22 @@
               </div>
 
               <!-- Insight Banner -->
-              <div onclick="openDrillModal('revenue-forecasting')" class="mt-4 p-2.5 bg-sky-50/70 hover:bg-sky-50 border border-sky-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors">
-                <div class="flex items-center gap-2">
-                  <span class="text-sky-600 font-bold">📊</span>
-                  <span>Cost is projected to grow by <strong class="text-sky-900 font-bold">0.83%</strong> next month based on current trends.</span>
+              <a href="index.html?agent=cost-spend&subtab=cost-management" class="mt-4 p-2.5 bg-sky-50/70 hover:bg-sky-100/70 border border-sky-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors block" title="Open Forecast Details in AI Reports">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sky-600 font-bold">📊</span>
+                    <span>Cost is projected to grow by <strong class="text-sky-900 font-bold">0.83%</strong> next month based on current trends.</span>
+                  </div>
+                  <svg class="w-3.5 h-3.5 text-sky-600 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </div>
-                <svg class="w-3.5 h-3.5 text-sky-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-              </div>
+              </a>
             </div>
 
             <!-- Full Width Action Button -->
-            <button onclick="openDrillModal('revenue-forecasting')" class="w-full py-2.5 bg-[#0077b6] hover:bg-[#026296] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+            <a href="index.html?agent=cost-spend&subtab=cost-management" class="w-full py-2.5 bg-[#0077b6] hover:bg-[#026296] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
               <span>View Forecast Details</span>
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </button>
+            </a>
           </div>
 
         </div>
