@@ -369,7 +369,7 @@
                 <div class="flex items-center gap-3">
                   <span class="bg-red-50 text-red-700 border border-red-200 text-xs px-3 py-1 font-semibold rounded-full flex items-center gap-1.5">
                     <svg class="w-3.5 h-3.5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                    <span>+14.46% MoM Forecast (<span id="cmRegionLabel">Global</span> - Software &amp; IT)</span>
+                    <span>+3.7% MoM Forecast (<span id="cmRegionLabel">Global</span> - All Regions)</span>
                   </span>
                   <button onclick="refreshCostCard()" class="text-slate-400 hover:text-[#7C017D] transition-colors p-1 cursor-pointer" title="Refresh AI Forecast">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
@@ -381,21 +381,21 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="bg-slate-50/80 border border-slate-200/80 p-4 rounded-xl shadow-xs">
                   <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Current Month Cost</span>
-                  <span class="text-2xl font-extrabold text-slate-900 font-mono" id="cmCurrentCost">$1,240,000.00</span>
+                  <span class="text-2xl font-extrabold text-slate-900 font-mono" id="cmCurrentCost">$1,527,987.00</span>
                   <span class="text-[11px] text-slate-500 block mt-1">Closed actuals MTD</span>
                 </div>
 
                 <div class="bg-purple-50/80 border border-purple-200/80 p-4 rounded-xl shadow-xs">
                   <span class="text-xs font-semibold text-purple-900 uppercase tracking-wider block mb-1">Predicted Next Month Cost</span>
-                  <span class="text-2xl font-extrabold text-purple-700 font-mono" id="cmPredictedCost">$1,419,304.00</span>
-                  <span class="text-[11px] text-purple-700 font-medium block mt-1">AI Projections</span>
+                  <span class="text-2xl font-extrabold text-purple-700 font-mono" id="cmPredictedCost">$1,584,142.00</span>
+                  <span class="text-[11px] text-purple-700 font-medium block mt-1">AI Projections (+3.7%)</span>
                 </div>
 
                 <div class="bg-slate-50/80 border border-slate-200/80 p-4 rounded-xl shadow-xs">
                   <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Cost Variance</span>
                   <div class="flex items-baseline gap-2">
-                    <span class="text-2xl font-extrabold text-red-600 font-mono" id="cmVariance">+$179,304.00</span>
-                    <span class="text-xs font-bold text-red-600">(OVER BUDGET)</span>
+                    <span class="text-2xl font-extrabold text-red-600 font-mono" id="cmVariance">+$56,155.00</span>
+                    <span class="text-xs font-bold text-red-600">(+3.7% MoM)</span>
                   </div>
                   <span class="text-[11px] text-slate-500 block mt-1">Forecast vs Current Baseline</span>
                 </div>
@@ -406,14 +406,14 @@
                       <span class="text-xs font-semibold text-emerald-900 uppercase tracking-wider block">Prev Month Accuracy</span>
                       <span class="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full">
                         <svg class="w-3 h-3 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                        High Precision
+                        Evaluated (5577 Recs)
                       </span>
                     </div>
-                    <span class="text-2xl font-extrabold text-emerald-700 font-mono" id="cmAccuracy">96.4%</span>
+                    <span class="text-2xl font-extrabold text-emerald-700 font-mono" id="cmAccuracy">64.4%</span>
                   </div>
                   <div class="mt-2 text-[11px] text-emerald-800/90 font-medium border-t border-emerald-200/60 pt-1.5 flex justify-between font-mono">
-                    <span>Actual: $1,180,000</span>
-                    <span>Pred: $1,137,500</span>
+                    <span>Actual: $1,475,000</span>
+                    <span>Pred: $1,527,987</span>
                   </div>
                 </div>
               </div>
@@ -442,31 +442,31 @@
                       <!-- Driver 1 -->
                       <div class="space-y-1 pb-2 border-b border-slate-100">
                         <div class="flex justify-between items-center text-xs">
-                          <span class="text-slate-700 font-semibold">Direct Project Delivery &amp; Contractors</span>
-                          <span class="text-slate-900 font-bold font-mono">$640,000.00 <span class="text-purple-700 text-[11px]">(51.6%)</span></span>
+                          <span class="text-slate-700 font-semibold">Total Manpower Cost</span>
+                          <span class="text-slate-900 font-bold font-mono">$343,746.00 <span class="text-purple-700 text-[11px]">(22.5%)</span></span>
                         </div>
                         <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
-                          <div class="bg-purple-700 h-full rounded-full" style="width: 51.6%"></div>
+                          <div class="bg-purple-700 h-full rounded-full" style="width: 22.5%"></div>
                         </div>
                       </div>
                       <!-- Driver 2 -->
                       <div class="space-y-1 pb-2 border-b border-slate-100">
                         <div class="flex justify-between items-center text-xs">
                           <span class="text-slate-700 font-semibold">Cloud Compute &amp; Enterprise SaaS</span>
-                          <span class="text-slate-900 font-bold font-mono">$320,000.00 <span class="text-purple-700 text-[11px]">(25.8%)</span></span>
+                          <span class="text-slate-900 font-bold font-mono">$285,000.00 <span class="text-purple-700 text-[11px]">(18.6%)</span></span>
                         </div>
                         <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
-                          <div class="bg-purple-700 h-full rounded-full" style="width: 25.8%"></div>
+                          <div class="bg-purple-700 h-full rounded-full" style="width: 18.6%"></div>
                         </div>
                       </div>
                       <!-- Driver 3 -->
                       <div class="space-y-1 pb-2 border-b border-slate-100">
                         <div class="flex justify-between items-center text-xs">
-                          <span class="text-slate-700 font-semibold">Corporate Travel &amp; Client Engagements</span>
-                          <span class="text-slate-900 font-bold font-mono">$160,000.00 <span class="text-purple-700 text-[11px]">(12.9%)</span></span>
+                          <span class="text-slate-700 font-semibold">Vendor &amp; Supplier Operations</span>
+                          <span class="text-slate-900 font-bold font-mono">$210,000.00 <span class="text-purple-700 text-[11px]">(13.7%)</span></span>
                         </div>
                         <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
-                          <div class="bg-purple-700 h-full rounded-full" style="width: 12.9%"></div>
+                          <div class="bg-purple-700 h-full rounded-full" style="width: 13.7%"></div>
                         </div>
                       </div>
                     </div>
@@ -479,7 +479,7 @@
                       Executive AI Narrative
                     </div>
                     <p class="italic text-purple-950 font-medium" id="cmNarrativeText">
-                      "Monthly spend of $1.24M is projected to expand +14.46% (+$179.3K) to $1.419M next month, driven primarily by contractor advisory renewals ($640K / 51.6%) and Q4 cloud infrastructure scaling ($320K / 25.8%)."
+                      "Live Database AI Engine evaluated 5577 expense records for Global (All Regions). Current month spend baseline is $15,27,987, with next month projected at $15,84,142 (+3.7% MoM). Prior month prediction accuracy was 64.4%. Primary cost driver for the period is \"Total Manpower Cost\" ($3,43,746, 22.5% of current month cost). Recommended action: Review vendor volume commitments and recurring overhead before next period close."
                     </p>
                   </div>
                 </div>
