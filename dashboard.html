@@ -225,12 +225,6 @@
 
         <!-- Global Header Controls -->
         <div class="flex items-center gap-3">
-          <!-- ML Status Badge -->
-          <div class="hidden sm:flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-200 text-xs font-semibold">
-          
-         
-          </div>
-
           <!-- Currency Selector -->
           <div class="relative">
             <select class="appearance-none bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 rounded-xl px-3 py-1.5 pr-7 focus:outline-none focus:border-[#7C017D] cursor-pointer">
@@ -331,7 +325,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
 
           <!-- Card 1: Cost Optimization -->
-          <div class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs flex flex-col justify-between space-y-4">
+          <div class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between h-full">
             <div>
               <!-- Header -->
               <div class="flex items-center justify-between">
@@ -347,48 +341,48 @@
               </div>
 
               <!-- Main Content Area -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5 items-center">
+              <div class="flex items-center justify-between gap-2 my-4 min-h-[96px]">
                 <!-- Left Metrics -->
-                <div>
-                  <div class="text-[10px] font-bold text-slate-400 tracking-wider uppercase">POTENTIAL ANNUAL SAVINGS</div>
+                <div class="shrink-0">
+                  <div class="text-[10px] font-bold text-slate-400 tracking-wider uppercase whitespace-nowrap">POTENTIAL ANNUAL SAVINGS</div>
                   <div class="text-2xl font-extrabold text-slate-900 mt-1">$383.7K</div>
-                  <div class="text-xs font-semibold text-emerald-600 mt-1 flex items-center gap-1">
+                  <div class="text-xs font-semibold text-emerald-600 mt-1 flex items-center gap-1 whitespace-nowrap">
                     <span>↑ 18% vs. previous period</span>
                   </div>
                 </div>
 
                 <!-- Right Donut & Breakdown -->
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2.5 shrink-0 ml-auto">
                   <!-- Donut Chart Canvas Container -->
-                  <div class="relative w-16 h-16 shrink-0 flex items-center justify-center">
-                    <canvas id="costOptDonut" width="64" height="64"></canvas>
+                  <div class="relative w-14 h-14 shrink-0 flex items-center justify-center">
+                    <canvas id="costOptDonut" width="56" height="56"></canvas>
                     <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center leading-none">
-                      <span class="text-xs font-extrabold text-slate-800">72%</span>
-                      <span class="text-[8px] text-slate-400 font-medium">Opt.</span>
+                      <span class="text-[11px] font-extrabold text-slate-800">72%</span>
+                      <span class="text-[7px] text-slate-400 font-medium">Opt.</span>
                     </div>
                   </div>
 
                   <!-- Legend items -->
-                  <div class="space-y-1 text-[11px] font-medium text-slate-600">
-                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-700"></span><span>Contract Opt.</span> <span class="font-bold ml-auto text-slate-800">40%</span></div>
-                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span><span>Duplicate Spend</span> <span class="font-bold ml-auto text-slate-800">25%</span></div>
-                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span><span>Underutilized</span> <span class="font-bold ml-auto text-slate-800">20%</span></div>
-                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-200"></span><span>Price Variance</span> <span class="font-bold ml-auto text-slate-800">15%</span></div>
+                  <div class="space-y-1 text-[10px] font-medium text-slate-600 shrink-0 min-w-[108px]">
+                    <div class="flex items-center justify-between gap-1.5 whitespace-nowrap"><div class="flex items-center gap-1 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-emerald-700 shrink-0"></span><span class="whitespace-nowrap">Contract Opt.</span></div> <span class="font-bold text-slate-800 ml-1.5">40%</span></div>
+                    <div class="flex items-center justify-between gap-1.5 whitespace-nowrap"><div class="flex items-center gap-1 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span><span class="whitespace-nowrap">Duplicate Spend</span></div> <span class="font-bold text-slate-800 ml-1.5">25%</span></div>
+                    <div class="flex items-center justify-between gap-1.5 whitespace-nowrap"><div class="flex items-center gap-1 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-teal-400 shrink-0"></span><span class="whitespace-nowrap">Underutilized</span></div> <span class="font-bold text-slate-800 ml-1.5">20%</span></div>
+                    <div class="flex items-center justify-between gap-1.5 whitespace-nowrap"><div class="flex items-center gap-1 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-emerald-200 shrink-0"></span><span class="whitespace-nowrap">Price Variance</span></div> <span class="font-bold text-slate-800 ml-1.5">15%</span></div>
                   </div>
                 </div>
               </div>
-
-              <!-- Insight Banner -->
-              <a href="index.html?agent=cost-spend&subtab=cost-optimization" class="mt-4 p-2.5 bg-emerald-50/70 hover:bg-emerald-100/70 border border-emerald-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors block" title="Open Cost Optimization in AI Reports">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-2">
-                    <span class="text-emerald-600 font-bold">💡</span>
-                    <span>We identified <strong class="text-emerald-800 font-bold">$383.7K</strong> in potential annual savings across 4 oppor...</span>
-                  </div>
-                  <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-              </a>
             </div>
+
+            <!-- Insight Banner -->
+            <a href="index.html?agent=cost-spend&subtab=cost-optimization" class="mb-4 p-2.5 bg-emerald-50/70 hover:bg-emerald-100/70 border border-emerald-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors min-h-[54px] block" title="Open Cost Optimization in AI Reports">
+              <div class="flex items-center justify-between w-full">
+                <div class="flex items-center gap-2">
+                  <span class="text-emerald-600 font-bold shrink-0">💡</span>
+                  <span>We identified <strong class="text-emerald-800 font-bold">$383.7K</strong> in potential annual savings across 4 opportunity areas.</span>
+                </div>
+                <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              </div>
+            </a>
 
             <!-- Full Width Action Button -->
             <a href="index.html?agent=cost-spend&subtab=cost-optimization" class="w-full py-2.5 bg-[#00875a] hover:bg-[#00744e] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
@@ -397,8 +391,8 @@
             </a>
           </div>
 
-          <!-- Card 2: Spend Analysis (Active elevated card) -->
-          <div class="kpi-card bg-white rounded-2xl border-2 border-indigo-200 shadow-md p-5 flex flex-col justify-between space-y-4 relative">
+          <!-- Card 2: Spend Analysis -->
+          <div class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between h-full">
             <div>
               <!-- Header -->
               <div class="flex items-center justify-between">
@@ -414,7 +408,7 @@
               </div>
 
               <!-- Main Content Area -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5 items-center">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4 items-center min-h-[96px]">
                 <!-- Left Metrics -->
                 <div>
                   <div class="text-[10px] font-bold text-slate-400 tracking-wider uppercase">TOP VENDOR CONCENTRATION</div>
@@ -425,7 +419,7 @@
                 </div>
 
                 <!-- Right Progress Bars -->
-                <div class="space-y-3">
+                <div class="space-y-2.5">
                   <div>
                     <div class="flex items-center justify-between text-[11px] font-medium text-slate-700 mb-1">
                       <span>Cost of Sales</span>
@@ -447,18 +441,18 @@
                   </div>
                 </div>
               </div>
-
-              <!-- Insight Banner -->
-              <a href="index.html?agent=cost-spend&subtab=spend-analysis" class="mt-4 p-2.5 bg-indigo-50/70 hover:bg-indigo-100/70 border border-indigo-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors block" title="Open Spend Analysis in AI Reports">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-2">
-                    <span class="text-indigo-600 font-bold">⚠️</span>
-                    <span>Top 2 units account for <strong class="text-indigo-900 font-bold">69.4%</strong> of total spend. Consider diversifying.</span>
-                  </div>
-                  <svg class="w-3.5 h-3.5 text-indigo-600 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-              </a>
             </div>
+
+            <!-- Insight Banner -->
+            <a href="index.html?agent=cost-spend&subtab=spend-analysis" class="mb-4 p-2.5 bg-indigo-50/70 hover:bg-indigo-100/70 border border-indigo-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors min-h-[54px] block" title="Open Spend Analysis in AI Reports">
+              <div class="flex items-center justify-between w-full">
+                <div class="flex items-center gap-2">
+                  <span class="text-indigo-600 font-bold shrink-0">⚠️</span>
+                  <span>Top 2 units account for <strong class="text-indigo-900 font-bold">69.4%</strong> of total spend. Consider diversifying.</span>
+                </div>
+                <svg class="w-3.5 h-3.5 text-indigo-600 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              </div>
+            </a>
 
             <!-- Full Width Action Button -->
             <a href="index.html?agent=cost-spend&subtab=spend-analysis" class="w-full py-2.5 bg-[#4338ca] hover:bg-[#3730a3] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
@@ -468,7 +462,7 @@
           </div>
 
           <!-- Card 3: Expense Monitoring -->
-          <div class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs flex flex-col justify-between space-y-4">
+          <div class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between h-full">
             <div>
               <!-- Header -->
               <div class="flex items-center justify-between">
@@ -484,7 +478,7 @@
               </div>
 
               <!-- Main Content Area -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5 items-center">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4 items-center min-h-[96px]">
                 <!-- Left Metrics -->
                 <div>
                   <div class="text-[10px] font-bold text-slate-400 tracking-wider uppercase">FLAGGED ANOMALIES</div>
@@ -497,7 +491,7 @@
                 <!-- Right Mini Bar Chart with Aug Anomaly Badge -->
                 <div class="relative pt-3">
                   <!-- Anomaly Pill Badge over August bar -->
-                  <div class="absolute top-0 right-7 px-1.5 py-0.5 bg-rose-500 text-white font-bold text-[8px] rounded-md uppercase tracking-wider shadow-2xs">
+                  <div class="absolute top-0 right-6 px-1.5 py-0.5 bg-rose-500 text-white font-bold text-[8px] rounded-md uppercase tracking-wider shadow-2xs">
                     Anomaly
                   </div>
                   <div class="h-14 w-full">
@@ -505,18 +499,18 @@
                   </div>
                 </div>
               </div>
-
-              <!-- Insight Banner -->
-              <a href="index.html?agent=cost-spend&subtab=expense-monitoring" class="mt-4 p-2.5 bg-amber-50/70 hover:bg-amber-100/70 border border-amber-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors block" title="Open Expense Monitoring in AI Reports">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-2">
-                    <span class="text-amber-600 font-bold">✓</span>
-                    <span>1 high-value transaction requires review. Potential policy violation...</span>
-                  </div>
-                  <svg class="w-3.5 h-3.5 text-amber-600 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-              </a>
             </div>
+
+            <!-- Insight Banner -->
+            <a href="index.html?agent=cost-spend&subtab=expense-monitoring" class="mb-4 p-2.5 bg-amber-50/70 hover:bg-amber-100/70 border border-amber-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors min-h-[54px] block" title="Open Expense Monitoring in AI Reports">
+              <div class="flex items-center justify-between w-full">
+                <div class="flex items-center gap-2">
+                  <span class="text-amber-600 font-bold shrink-0">✓</span>
+                  <span>1 high-value transaction requires review. Potential policy violation detected.</span>
+                </div>
+                <svg class="w-3.5 h-3.5 text-amber-600 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              </div>
+            </a>
 
             <!-- Full Width Action Button -->
             <a href="index.html?agent=cost-spend&subtab=expense-monitoring" class="w-full py-2.5 bg-[#c25e00] hover:bg-[#a64e00] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
@@ -531,7 +525,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
 
           <!-- Card 1: Budget Utilization -->
-          <div class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs flex flex-col justify-between space-y-4">
+          <div class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between h-full">
             <div>
               <!-- Header -->
               <div class="flex items-center justify-between">
@@ -547,7 +541,7 @@
               </div>
 
               <!-- Main Content Grid -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5 items-center">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 my-4 items-center min-h-[96px]">
                 <!-- Left: Donut with 51.7% used -->
                 <div class="flex items-center gap-4">
                   <div class="relative w-16 h-16 shrink-0 flex items-center justify-center">
@@ -558,9 +552,9 @@
                     </div>
                   </div>
 
-                  <div class="space-y-1.5 text-xs font-medium text-slate-600">
-                    <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#7C017D]"></span><span>Used</span> <span class="font-bold text-slate-900 ml-3">51.7%</span></div>
-                    <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-200"></span><span>Remaining</span> <span class="font-bold text-slate-900 ml-3">48.3%</span></div>
+                  <div class="space-y-1.5 text-xs font-medium text-slate-600 shrink-0">
+                    <div class="flex items-center justify-between gap-3 whitespace-nowrap"><div class="flex items-center gap-1.5 whitespace-nowrap"><span class="w-2 h-2 rounded-full bg-[#7C017D] shrink-0"></span><span class="whitespace-nowrap">Used</span></div> <span class="font-bold text-slate-900 ml-2">51.7%</span></div>
+                    <div class="flex items-center justify-between gap-3 whitespace-nowrap"><div class="flex items-center gap-1.5 whitespace-nowrap"><span class="w-2 h-2 rounded-full bg-purple-200 shrink-0"></span><span class="whitespace-nowrap">Remaining</span></div> <span class="font-bold text-slate-900 ml-2">48.3%</span></div>
                   </div>
                 </div>
 
@@ -575,18 +569,18 @@
                   </div>
                 </div>
               </div>
-
-              <!-- Insight Banner -->
-              <a href="index.html?agent=cost-spend&subtab=budget-utilization" class="mt-4 p-2.5 bg-purple-50/70 hover:bg-purple-100/70 border border-purple-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors block" title="Open Budget Utilization in AI Reports">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-2">
-                    <span class="text-[#7C017D] font-bold">⚠️</span>
-                    <span>You are at risk of exceeding budget in Q3 based on current spend trend.</span>
-                  </div>
-                  <svg class="w-3.5 h-3.5 text-[#7C017D] shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-              </a>
             </div>
+
+            <!-- Insight Banner -->
+            <a href="index.html?agent=cost-spend&subtab=budget-utilization" class="mb-4 p-2.5 bg-purple-50/70 hover:bg-purple-100/70 border border-purple-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors min-h-[54px] block" title="Open Budget Utilization in AI Reports">
+              <div class="flex items-center justify-between w-full">
+                <div class="flex items-center gap-2">
+                  <span class="text-[#7C017D] font-bold shrink-0">⚠️</span>
+                  <span>You are at risk of exceeding budget in Q3 based on current spend trend.</span>
+                </div>
+                <svg class="w-3.5 h-3.5 text-[#7C017D] shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              </div>
+            </a>
 
             <!-- Full Width Action Button -->
             <a href="index.html?agent=cost-spend&subtab=budget-utilization" class="w-full py-2.5 bg-[#7C017D] hover:bg-[#640564] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
@@ -596,7 +590,7 @@
           </div>
 
           <!-- Card 2: Revenue Forecasting -->
-          <div class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs flex flex-col justify-between space-y-4">
+          <div class="kpi-card bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between h-full">
             <div>
               <!-- Header -->
               <div class="flex items-center justify-between">
@@ -612,7 +606,7 @@
               </div>
 
               <!-- Main Content Grid -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5 items-center">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4 items-center min-h-[96px]">
                 <!-- Left Metrics -->
                 <div>
                   <div class="text-[10px] font-bold text-slate-400 tracking-wider uppercase">FORECAST FOR NEXT MONTH</div>
@@ -635,18 +629,18 @@
                   </div>
                 </div>
               </div>
-
-              <!-- Insight Banner -->
-              <a href="index.html?agent=cost-spend&subtab=cost-management" class="mt-4 p-2.5 bg-sky-50/70 hover:bg-sky-100/70 border border-sky-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors block" title="Open Forecast Details in AI Reports">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-2">
-                    <span class="text-sky-600 font-bold">📊</span>
-                    <span>Cost is projected to grow by <strong class="text-sky-900 font-bold">0.83%</strong> next month based on current trends.</span>
-                  </div>
-                  <svg class="w-3.5 h-3.5 text-sky-600 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </div>
-              </a>
             </div>
+
+            <!-- Insight Banner -->
+            <a href="index.html?agent=cost-spend&subtab=cost-management" class="mb-4 p-2.5 bg-sky-50/70 hover:bg-sky-100/70 border border-sky-200/60 rounded-xl flex items-center justify-between text-xs text-slate-700 cursor-pointer transition-colors min-h-[54px] block" title="Open Forecast Details in AI Reports">
+              <div class="flex items-center justify-between w-full">
+                <div class="flex items-center gap-2">
+                  <span class="text-sky-600 font-bold shrink-0">📊</span>
+                  <span>Cost is projected to grow by <strong class="text-sky-900 font-bold">0.83%</strong> next month based on current trends.</span>
+                </div>
+                <svg class="w-3.5 h-3.5 text-sky-600 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              </div>
+            </a>
 
             <!-- Full Width Action Button -->
             <a href="index.html?agent=cost-spend&subtab=cost-management" class="w-full py-2.5 bg-[#0077b6] hover:bg-[#026296] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
@@ -983,11 +977,11 @@
       },
       'revenue-forecasting': {
         title: 'Revenue & Cost Forecast Model',
-        category: 'Predictive Neural Network · 90-Day Outlook',
+        category: 'Predictive AI Engine · 90-Day Outlook',
         metric: '$14,318',
         sub: '↑ 0.83% Next Month Projected',
         highlightLabel: 'Next Month Forecast Projection',
-        desc: 'Time-series ARIMA and Prophet ML models project monthly spend to rise from $14,200 to $14,318 (+0.83%) in October driven by seasonality in operational software renewals and customer onboarding velocity.',
+        desc: 'Predictive time-series forecasting models project monthly spend to rise from $14,200 to $14,318 (+0.83%) in October driven by seasonality in operational software renewals and customer onboarding velocity.',
         steps: [
           'Lock in forward annual pricing contracts ahead of anticipated Q4 price indexing.',
           'Model alternate high-growth vs conservative scenario cash burn curves.',

@@ -364,7 +364,7 @@
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <h3 class="font-bold text-lg text-[#2b0830]">AI Cost Management &amp; Forecast Engine</h3>
-                  <p class="text-xs text-slate-500 mt-0.5">XGBoost recursive regression with lag features and 95% confidence intervals</p>
+                  <p class="text-xs text-slate-500 mt-0.5">Predictive forecasting with lag features and 95% confidence intervals</p>
                 </div>
                 <div class="flex items-center gap-3">
                   <span class="bg-red-50 text-red-700 border border-red-200 text-xs px-3 py-1 font-semibold rounded-full flex items-center gap-1.5">
@@ -388,7 +388,7 @@
                 <div class="bg-purple-50/80 border border-purple-200/80 p-4 rounded-xl shadow-xs">
                   <span class="text-xs font-semibold text-purple-900 uppercase tracking-wider block mb-1">Predicted Next Month Cost</span>
                   <span class="text-2xl font-extrabold text-purple-700 font-mono" id="cmPredictedCost">$1,419,304.00</span>
-                  <span class="text-[11px] text-purple-700 font-medium block mt-1">XGBoost ML Projections</span>
+                  <span class="text-[11px] text-purple-700 font-medium block mt-1">AI Projections</span>
                 </div>
 
                 <div class="bg-slate-50/80 border border-slate-200/80 p-4 rounded-xl shadow-xs">
@@ -479,7 +479,7 @@
                       Executive AI Narrative
                     </div>
                     <p class="italic text-purple-950 font-medium" id="cmNarrativeText">
-                      "XGBoost regressor projects a 14.46% cost expansion in next month's run-rate. Primary escalation stems from Q4 cloud server scaling and annual advisory renewals. Reallocating $85,000 in unused contractor capacity will restore margin targets."
+                      "Predictive models project a 14.46% cost expansion in next month's run-rate. Primary escalation stems from Q4 cloud server scaling and annual advisory renewals. Reallocating $85,000 in unused contractor capacity will restore margin targets."
                     </p>
                   </div>
                 </div>
@@ -738,7 +738,7 @@
                   Expense Monitoring &amp; Milestone PO Intelligence
                 </h2>
                 <p class="text-xs text-slate-500 mt-1">
-                  Real-time milestone tracking, Purchase Order (PO) budget ceiling monitoring, Isolation Forest ML anomaly scoring, and duplicate invoice audit
+                  Real-time milestone tracking, Purchase Order (PO) budget ceiling monitoring, automated ML anomaly scoring, and duplicate invoice audit
                 </p>
               </div>
               <button onclick="toast('Expense monitoring scan completed.')" class="p-2 text-slate-400 hover:text-purple-700 bg-slate-50 hover:bg-purple-50 border border-slate-200 rounded-lg transition-colors cursor-pointer self-start md:self-auto">
@@ -776,7 +776,7 @@
             <!-- Anomaly Table with Severity Filter -->
             <div class="space-y-3">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-800 uppercase tracking-wider">Isolation Forest Anomaly Queue</span>
+                <span class="text-xs font-bold text-slate-800 uppercase tracking-wider">Automated Anomaly Queue</span>
                 <div class="flex items-center gap-1">
                   <button onclick="filterAnomalies('all')" class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-[#7C017D] text-white">All</button>
                   <button onclick="filterAnomalies('Critical')" class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-red-100 text-red-700">Critical</button>
@@ -990,7 +990,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <h3 class="font-bold text-lg text-slate-900">13-Week Cash Flow Forecast &amp; Liquidity Horizon</h3>
-                <p class="text-xs text-slate-500 mt-0.5">Gradient Boosting projection with rolling recursive reforecasting</p>
+                <p class="text-xs text-slate-500 mt-0.5">Predictive projection with rolling recursive reforecasting</p>
               </div>
               <div class="flex items-center gap-2">
                 <span class="bg-emerald-50 text-emerald-800 border border-emerald-300 text-xs px-3 py-1 font-semibold rounded-full font-mono">
@@ -1060,7 +1060,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <h3 class="font-bold text-lg text-slate-900">AR Aging &amp; Collection Efficiency Monitor</h3>
-                <p class="text-xs text-slate-500 mt-0.5">DSO Performance &amp; Random Forest Default Risk Scoring</p>
+                <p class="text-xs text-slate-500 mt-0.5">DSO Performance &amp; Predictive Default Risk Scoring</p>
               </div>
               <span class="bg-amber-50 text-amber-800 border border-amber-300 text-xs px-3 py-1 font-semibold rounded-full">
                 DSO: 42.5 Days (Target: 35.0d)
@@ -1119,7 +1119,7 @@
             <div class="space-y-2">
               <span class="text-xs font-bold text-red-700 uppercase tracking-wider flex items-center gap-1">
                 <svg class="w-3.5 h-3.5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                High Risk Invoices (Random Forest Default Probability &ge; 50%)
+                High Risk Invoices (Default Risk Probability &ge; 50%)
               </span>
               <div class="overflow-x-auto border border-slate-200 rounded-xl">
                 <table class="w-full text-xs text-left">
@@ -1160,7 +1160,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <h3 class="font-bold text-lg text-slate-900">Predictive Collections &amp; Automated Dunning Engine</h3>
-                <p class="text-xs text-slate-500 mt-0.5">ML Delay Prediction + Gemini Dunning Outreach Strategy</p>
+                <p class="text-xs text-slate-500 mt-0.5">ML Delay Prediction + Dunning Outreach Strategy</p>
               </div>
               <span class="bg-indigo-50 text-indigo-800 border border-indigo-300 text-xs px-3 py-1 font-semibold rounded-full">
                 Avg Predicted Delay: +14.2 days
@@ -1249,7 +1249,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <h3 class="font-bold text-lg text-slate-900">Working Capital &amp; Cash Conversion Cycle (CCC)</h3>
-                <p class="text-xs text-slate-500 mt-0.5">DSO vs DPO ElasticNet Capital Optimization</p>
+                <p class="text-xs text-slate-500 mt-0.5">DSO vs DPO Capital Optimization</p>
               </div>
               <span class="bg-emerald-50 text-emerald-800 border border-emerald-300 text-xs px-3 py-1 font-semibold rounded-full">
                 CCC: 25.7 Days
@@ -1323,7 +1323,7 @@
 
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h3 class="font-bold text-lg text-slate-900">Liquidity Risk &amp; Monte Carlo Stress Testing</h3>
+                <h3 class="font-bold text-lg text-slate-900">Liquidity Risk &amp; Scenario Stress Testing</h3>
                 <p class="text-xs text-slate-500 mt-0.5">Cash Runway &amp; 1,000 Iteration Scenario Simulation</p>
               </div>
               <span class="bg-purple-50 text-purple-800 border border-purple-300 text-xs px-3 py-1 font-semibold rounded-full font-mono">
@@ -1355,7 +1355,7 @@
             <div class="space-y-2">
               <span class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1">
                 <svg class="w-3.5 h-3.5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                Monte Carlo Stress Test Scenarios (1,000 Iterations)
+                Scenario Stress Test Simulations (1,000 Iterations)
               </span>
               <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1.5">
@@ -1683,7 +1683,7 @@
               pointRadius: 4,
             },
             {
-              label: 'XGBoost Predicted Spend',
+              label: 'Predicted Spend',
               data: [null, null, null, null, null, 1240000, 1419300, 1485000, 1520000],
               borderColor: '#7C017D',
               backgroundColor: 'rgba(124, 1, 125, 0.1)',
@@ -1811,7 +1811,7 @@
     }
 
     function refreshCostCard() {
-      toast("XGBoost Regression model recalibrated with latest ERP actuals.");
+      toast("Forecast model recalibrated with latest ERP actuals.");
     }
 
     // ─── MODAL CONTROLS ──────────────────────────────────────────
@@ -1916,7 +1916,7 @@
         if (qLower.includes('forecast') || qLower.includes('spend') || qLower.includes('next month')) {
           answer = "Next month spend is forecasted at $1,419,304.00 (+14.46% MoM). Key driver is contractor advisory renewals ($640k / 51.6%) and AWS cloud infrastructure scaling ($320k / 25.8%).";
         } else if (qLower.includes('anomaly') || qLower.includes('unusual') || qLower.includes('flag')) {
-          answer = "Isolation Forest detected 6 anomalous transactions totaling $84,500 at risk. Top flag is EXP-9041: duplicate invoice from TechCorp Solutions for $24,500.";
+          answer = "Automated anomaly detection identified 6 anomalous transactions totaling $84,500 at risk. Top flag is EXP-9041: duplicate invoice from TechCorp Solutions for $24,500.";
         } else if (qLower.includes('cash') || qLower.includes('ccc') || qLower.includes('working capital')) {
           answer = "Our current Cash Conversion Cycle is 25.7 days (DSO 42.5 + DIO 18.2 - DPO 35.0). Extending Tier-2 supplier terms to Net 45 will unlock $450,000 in immediate free liquidity.";
         } else {
